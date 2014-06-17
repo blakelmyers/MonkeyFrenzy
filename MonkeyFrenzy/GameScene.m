@@ -39,7 +39,9 @@ static inline CGPoint rwNormalize(CGPoint a) {
 }
 
 @implementation GameScene
- 
+
+MonkeyType theMonkeyType;
+
 -(id)initWithSize:(CGSize)size {    
     if (self = [super initWithSize:size]) {
  
@@ -59,15 +61,33 @@ static inline CGPoint rwNormalize(CGPoint a) {
       
         self.physicsWorld.gravity = CGVectorMake(0,0);
         self.physicsWorld.contactDelegate = self;
+        
+        theMonkeyType = NORMAL;
  
     }
     return self;
 }
 
-- (void)addMonkey {
+- (void)addMonkey:(MonkeyType)type {
  
     // Create sprite
-    SKSpriteNode * monkey = [SKSpriteNode spriteNodeWithImageNamed:@"monkey"];
+    SKSpriteNode * monkey;
+    switch (type)
+    {
+        case NORMAL:
+            monkey = [SKSpriteNode spriteNodeWithImageNamed:@"monkey"];
+            break;
+        case FAT:
+            monkey = [SKSpriteNode spriteNodeWithImageNamed:@"fatMonkey"];
+            break;
+        case FRENZY:
+            monkey = [SKSpriteNode spriteNodeWithImageNamed:@"frenzyMonkey"];
+            break;
+        default:
+            monkey = [SKSpriteNode spriteNodeWithImageNamed:@"monkey"];
+            break;
+    }
+    
     monkey.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:monkey.size]; // 1
     monkey.physicsBody.dynamic = YES; // 2
     monkey.physicsBody.categoryBitMask = monkeyCategory; // 3
@@ -107,8 +127,23 @@ static inline CGPoint rwNormalize(CGPoint a) {
  
     self.lastSpawnTimeInterval += timeSinceLast;
     if (self.lastSpawnTimeInterval > 1) {
+        switch (theMonkeyType)
+        {
+            case NORMAL:
+                theMonkeyType = FAT;
+                break;
+            case FAT:
+                theMonkeyType = FRENZY;
+                break;
+            case FRENZY:
+                theMonkeyType = NORMAL;
+                break;
+            default:
+                theMonkeyType = NORMAL;
+                break;
+        }
         self.lastSpawnTimeInterval = 0;
-        [self addMonkey];
+        [self addMonkey:theMonkeyType];
     }
 }
 

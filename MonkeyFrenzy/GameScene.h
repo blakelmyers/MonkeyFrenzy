@@ -6,4 +6,11 @@
 
 @interface GameScene : SKScene
 
+typedef enum monkeyTypes
+{
+    NORMAL,
+    FAT,
+    FRENZY
+} MonkeyType;
+
 @end
