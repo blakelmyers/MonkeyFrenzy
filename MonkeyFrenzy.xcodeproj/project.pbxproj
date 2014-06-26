@@ -39,6 +39,7 @@
 		B668F506195BC70A0012AF81 /* app3.png in Resources */ = {isa = PBXBuildFile; fileRef = B668F505195BC70A0012AF81 /* app3.png */; };
 		B668F508195BC7690012AF81 /* app2.png in Resources */ = {isa = PBXBuildFile; fileRef = B668F507195BC7690012AF81 /* app2.png */; };
 		B668F50A195BC7A70012AF81 /* app1.png in Resources */ = {isa = PBXBuildFile; fileRef = B668F509195BC7A70012AF81 /* app1.png */; };
+		B668F50C195CC5230012AF81 /* Zookeeper_Female.png in Resources */ = {isa = PBXBuildFile; fileRef = B668F50B195CC5230012AF81 /* Zookeeper_Female.png */; };
 		B6B592AB194D314B006D85D5 /* MainMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = B6B592AA194D314B006D85D5 /* MainMenu.m */; };
 		B6B592AE194D33E8006D85D5 /* CreditsMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = B6B592AD194D33E8006D85D5 /* CreditsMenu.m */; };
 /* End PBXBuildFile section */
@@ -93,6 +94,7 @@
 		B668F505195BC70A0012AF81 /* app3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = app3.png; sourceTree = "<group>"; };
 		B668F507195BC7690012AF81 /* app2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = app2.png; sourceTree = "<group>"; };
 		B668F509195BC7A70012AF81 /* app1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = app1.png; sourceTree = "<group>"; };
+		B668F50B195CC5230012AF81 /* Zookeeper_Female.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Zookeeper_Female.png; sourceTree = "<group>"; };
 		B6B592A9194D314B006D85D5 /* MainMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainMenu.h; sourceTree = "<group>"; };
 		B6B592AA194D314B006D85D5 /* MainMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainMenu.m; sourceTree = "<group>"; };
 		B6B592AC194D33E8006D85D5 /* CreditsMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreditsMenu.h; sourceTree = "<group>"; };
@@ -226,6 +228,7 @@
 		B637C47A194CC932003EE8FD /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				B668F50B195CC5230012AF81 /* Zookeeper_Female.png */,
 				B668F509195BC7A70012AF81 /* app1.png */,
 				B668F507195BC7690012AF81 /* app2.png */,
 				B668F505195BC70A0012AF81 /* app3.png */,
@@ -319,6 +322,7 @@
 				B637C467194BE680003EE8FD /* Zookeeper.png in Resources */,
 				B637C479194CC778003EE8FD /* Background.png in Resources */,
 				B64E34C9194FDCFE00A49862 /* frenzyMonkey.png in Resources */,
+				B668F50C195CC5230012AF81 /* Zookeeper_Female.png in Resources */,
 				B637C46D194CC293003EE8FD /* Snappy.mp3 in Resources */,
 				B668F508195BC7690012AF81 /* app2.png in Resources */,
 				B64E34CB194FDD6A00A49862 /* monkey.png in Resources */,

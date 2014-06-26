@@ -47,6 +47,7 @@ MonkeyType theMonkeyType;
 ModeType theModeSelected;
 BOOL displayLabel = true;
 SKLabelNode *label;
+int bananaCount = 0;
 
 -(id)initWithSize:(CGSize)size mode:(ModeType)modePicked{
     if (self = [super initWithSize:size]) {
@@ -58,14 +59,14 @@ SKLabelNode *label;
         bgImage.position = CGPointMake(self.size.width/2, self.size.height/2);
         [self addChild:bgImage];
         
-        self.player = [SKSpriteNode spriteNodeWithImageNamed:@"Zookeeper"];
-        self.player.position = CGPointMake(self.player.size.width/2, self.frame.size.height/8);
+        self.player = [SKSpriteNode spriteNodeWithImageNamed:@"Zookeeper_Female"];
+        self.player.position = CGPointMake(self.player.size.width/2, self.frame.size.height/6);
         [self addChild:self.player];
       
         self.physicsWorld.gravity = CGVectorMake(0,0);
         self.physicsWorld.contactDelegate = self;
         
-        theMonkeyType = NORMAL;
+        theMonkeyType = FRENZY;
         
         NSString *message;
         message = @"Tap to throw Bananas to feed the monkeys.";
@@ -161,7 +162,7 @@ SKLabelNode *label;
         SKAction * actionMoveDone = [SKAction removeFromParent];
         SKAction * loseAction = [SKAction runBlock:^{
         SKTransition *reveal = [SKTransition flipHorizontalWithDuration:0.5];
-        SKScene * gameOverScene = [[GameOverScene alloc] initWithSize:self.size won:NO];
+            SKScene * gameOverScene = [[GameOverScene alloc] initWithSize:self.size won:NO mode:theModeSelected];
         [self.view presentScene:gameOverScene transition: reveal];
         }];
         [monkey runAction:[SKAction sequence:@[actionMove, loseAction, actionMoveDone]]];
@@ -191,7 +192,7 @@ SKLabelNode *label;
             [self addMonkey:theMonkeyType];
         }
     }
-    else
+    else if (theModeSelected == NORMAL_MODE)
     {
         if (self.lastSpawnTimeInterval > 1) {
             switch (theMonkeyType)
@@ -207,6 +208,32 @@ SKLabelNode *label;
                     break;
                 default:
                     theMonkeyType = NORMAL;
+                    break;
+            }
+            self.lastSpawnTimeInterval = 0;
+            [self addMonkey:theMonkeyType];
+        }
+    }
+    else   // FRENZY_MODE
+    {
+        if (self.lastSpawnTimeInterval > 1) {
+            switch (theMonkeyType)
+            {
+                case NORMAL:
+                    theMonkeyType = FAT;
+                    bananaCount += 5;
+                    break;
+                case FAT:
+                    theMonkeyType = FRENZY;
+                    bananaCount += 1;
+                    break;
+                case FRENZY:
+                    theMonkeyType = NORMAL;
+                    bananaCount += 2;
+                    break;
+                default:
+                    theMonkeyType = NORMAL;
+                    bananaCount += 2;
                     break;
             }
             self.lastSpawnTimeInterval = 0;
@@ -237,7 +264,6 @@ SKLabelNode *label;
         [label removeFromParent];
     }
     
-    [self runAction:[SKAction playSoundFileNamed:@"throwing.m4a" waitForCompletion:NO]];
  
     // 1 - Choose one of the touches to work with
     UITouch * touch = [touches anyObject];
@@ -260,7 +286,20 @@ SKLabelNode *label;
     if (offset.x <= 0) return;
  
     // 5 - OK to add now - we've double checked position
-    [self addChild:banana];
+    if(theModeSelected != FRENZY_MODE)
+    {
+        [self addChild:banana];
+        [self runAction:[SKAction playSoundFileNamed:@"throwing.m4a" waitForCompletion:NO]];
+    }
+    else  // have limited bananas in Frenzy mode
+    {
+        NSLog(@"%d", bananaCount);
+        if(bananaCount > 0)
+        {
+            [self addChild:banana];
+            [self runAction:[SKAction playSoundFileNamed:@"throwing.m4a" waitForCompletion:NO]];
+        }
+    }
  
     // 6 - Get the direction of where to shoot
     CGPoint direction = rwNormalize(offset);
@@ -276,7 +315,19 @@ SKLabelNode *label;
     float realMoveDuration = self.size.width / velocity;
     SKAction * actionMove = [SKAction moveTo:realDest duration:realMoveDuration];
     SKAction * actionMoveDone = [SKAction removeFromParent];
-    [banana runAction:[SKAction sequence:@[actionMove, actionMoveDone]]];
+    
+    if(theModeSelected != FRENZY_MODE)
+    {
+        [banana runAction:[SKAction sequence:@[actionMove, actionMoveDone]]];
+    }
+    else  // have limited bananas in Frenzy mode
+    {
+        if(bananaCount > 0)
+        {
+            --bananaCount;
+            [banana runAction:[SKAction sequence:@[actionMove, actionMoveDone]]];
+        }
+    }
  
 }
 
@@ -292,7 +343,7 @@ SKLabelNode *label;
        self.monkeysFed++;
        if (self.monkeysFed > 30) {
            SKTransition *reveal = [SKTransition flipHorizontalWithDuration:0.5];
-           SKScene * gameOverScene = [[GameOverScene alloc] initWithSize:self.size won:YES];
+           SKScene * gameOverScene = [[GameOverScene alloc] initWithSize:self.size won:YES mode:theModeSelected];
            [self.view presentScene:gameOverScene transition: reveal];
        }
     }

@@ -11,10 +11,13 @@
 #import "GameOverScene.h"
  
 @implementation GameOverScene
- 
--(id)initWithSize:(CGSize)size won:(BOOL)won {
+
+ModeType theModeSelected;
+
+-(id)initWithSize:(CGSize)size won:(BOOL)won mode:(ModeType)modePicked{
     if (self = [super initWithSize:size]) {
  
+        theModeSelected = modePicked;
         // 1
         self.backgroundColor = [SKColor colorWithRed:1.0 green:1.0 blue:0.0 alpha:1.0];
         
@@ -41,7 +44,7 @@
                 [SKAction runBlock:^{
                     // 5
                     SKTransition *reveal = [SKTransition flipHorizontalWithDuration:0.5];
-                    SKScene * myScene = [[GameScene alloc] initWithSize:self.size];
+                    SKScene * myScene = [[GameScene alloc] initWithSize:self.size mode:theModeSelected];
                     [self.view presentScene:myScene transition: reveal];
                 }]
             ]]

@@ -23,13 +23,13 @@
         [self addChild:bgImage];
         
         NSString *message;
-        message = @"Select a mode by tapping the monkeys";
+        message = @"Select a Mode";
         
         SKLabelNode *label = [SKLabelNode labelNodeWithFontNamed:@"Menlo-Regular"];
         label.text = message;
-        label.fontSize = 15;
+        label.fontSize = 22;
         label.fontColor = [SKColor blackColor];
-        label.position = CGPointMake(self.size.width/2, self.size.height/2.9);
+        label.position = CGPointMake(self.size.width/2, self.size.height/2.5);
         [self addChild:label];
         
         SKSpriteNode * title = [SKSpriteNode spriteNodeWithImageNamed:@"TitlePic"];
@@ -37,19 +37,49 @@
         [self addChild:title];
         
         SKSpriteNode * easyBtn = [SKSpriteNode spriteNodeWithImageNamed:@"monkey"];
-        easyBtn.position = CGPointMake(self.size.width/6, self.size.height/5);
+        easyBtn.position = CGPointMake(self.size.width/6, self.size.height/6);
         easyBtn.name = @"Easy";
         [self addChild:easyBtn];
         
         SKSpriteNode * normalBtn = [SKSpriteNode spriteNodeWithImageNamed:@"fatMonkey"];
-        normalBtn.position = CGPointMake(self.size.width/2, self.size.height/5);
+        normalBtn.position = CGPointMake(self.size.width/2, self.size.height/6);
         normalBtn.name = @"Normal";
         [self addChild:normalBtn];
         
         SKSpriteNode *frenzyBtn = [SKSpriteNode spriteNodeWithImageNamed:@"frenzyMonkey"];
-        frenzyBtn.position = CGPointMake(self.size.width/1.2, self.size.height/5);
+        frenzyBtn.position = CGPointMake(self.size.width/1.2, self.size.height/6);
         frenzyBtn.name = @"Frenzy";
         [self addChild:frenzyBtn];
+        
+        NSString *message2;
+        message2 = @"Easy";
+        
+        SKLabelNode *label2 = [SKLabelNode labelNodeWithFontNamed:@"Menlo-Regular"];
+        label2.text = message2;
+        label2.fontSize = 18;
+        label2.fontColor = [SKColor blackColor];
+        label2.position = CGPointMake(self.size.width/6, self.size.height/3.7);
+        [self addChild:label2];
+        
+        NSString *message3;
+        message3 = @"Normal";
+        
+        SKLabelNode *label3 = [SKLabelNode labelNodeWithFontNamed:@"Menlo-Regular"];
+        label3.text = message3;
+        label3.fontSize = 18;
+        label3.fontColor = [SKColor blackColor];
+        label3.position = CGPointMake(self.size.width/2, self.size.height/3.7);
+        [self addChild:label3];
+        
+        NSString *message4;
+        message4 = @"Frenzy";
+        
+        SKLabelNode *label4 = [SKLabelNode labelNodeWithFontNamed:@"Menlo-Regular"];
+        label4.text = message4;
+        label4.fontSize = 18;
+        label4.fontColor = [SKColor blackColor];
+        label4.position = CGPointMake(self.size.width/1.2, self.size.height/3.7);
+        [self addChild:label4];
         
     }
     return self;
