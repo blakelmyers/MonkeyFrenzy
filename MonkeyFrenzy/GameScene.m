@@ -1,6 +1,9 @@
 //
 //  GameScene.m
 //
+//  Created by Myers on 6/14/14.
+//  Copyright (c) Blake Myers All rights reserved.
+//
 
 #import "GameScene.h"
 #import "GameOverScene.h"
@@ -41,20 +44,20 @@ static inline CGPoint rwNormalize(CGPoint a) {
 @implementation GameScene
 
 MonkeyType theMonkeyType;
+ModeType theModeSelected;
+BOOL displayLabel = true;
+SKLabelNode *label;
 
--(id)initWithSize:(CGSize)size {    
+-(id)initWithSize:(CGSize)size mode:(ModeType)modePicked{
     if (self = [super initWithSize:size]) {
+
+        theModeSelected = modePicked;
  
-        // 2
-        NSLog(@"Size: %@", NSStringFromCGSize(size));
- 
-        // 3
         self.backgroundColor = [SKColor colorWithRed:0.0 green:1.0 blue:0.0 alpha:1.0];
         SKSpriteNode *bgImage = [SKSpriteNode spriteNodeWithImageNamed:@"Background"];
         bgImage.position = CGPointMake(self.size.width/2, self.size.height/2);
         [self addChild:bgImage];
         
-        // 4
         self.player = [SKSpriteNode spriteNodeWithImageNamed:@"Zookeeper"];
         self.player.position = CGPointMake(self.player.size.width/2, self.frame.size.height/8);
         [self addChild:self.player];
@@ -63,6 +66,17 @@ MonkeyType theMonkeyType;
         self.physicsWorld.contactDelegate = self;
         
         theMonkeyType = NORMAL;
+        
+        NSString *message;
+        message = @"Tap to throw Bananas to feed the monkeys.";
+        
+        // 3
+        label = [SKLabelNode labelNodeWithFontNamed:@"Menlo-Regular"];
+        label.text = message;
+        label.fontSize = 15;
+        label.fontColor = [SKColor blackColor];
+        label.position = CGPointMake(self.size.width/2, self.size.height/2);
+        [self addChild:label];
  
     }
     return self;
@@ -72,21 +86,38 @@ MonkeyType theMonkeyType;
  
     // Create sprite
     SKSpriteNode * monkey;
+    
+    int actualDuration;  // monkey speed
+    
+    NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithObjectsAndKeys:
+                                 [NSNumber numberWithInt:1], @"Health",
+                                 nil];
+    
     switch (type)
     {
         case NORMAL:
             monkey = [SKSpriteNode spriteNodeWithImageNamed:@"monkey"];
+            actualDuration = 3.0;
+            [dict setObject:[NSNumber numberWithInt:2] forKey:@"Health"];
             break;
         case FAT:
             monkey = [SKSpriteNode spriteNodeWithImageNamed:@"fatMonkey"];
+            [dict setObject:[NSNumber numberWithInt:5] forKey:@"Health"];
+            actualDuration = 6.0;
             break;
         case FRENZY:
             monkey = [SKSpriteNode spriteNodeWithImageNamed:@"frenzyMonkey"];
+            [dict setObject:[NSNumber numberWithInt:1] forKey:@"Health"];
+            actualDuration = 2.0;
             break;
         default:
             monkey = [SKSpriteNode spriteNodeWithImageNamed:@"monkey"];
+            [dict setObject:[NSNumber numberWithInt:2] forKey:@"Health"];
+            actualDuration = 3.0;
             break;
     }
+    
+    monkey.userData = dict;
     
     monkey.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:monkey.size]; // 1
     monkey.physicsBody.dynamic = YES; // 2
@@ -94,56 +125,93 @@ MonkeyType theMonkeyType;
     monkey.physicsBody.contactTestBitMask = bananaCategory; // 4
     monkey.physicsBody.collisionBitMask = 0; // 5
   
-    // Determine where to spawn the monkey along the Y axis
-    int minY = monkey.size.height / 2;
-    int maxY = self.frame.size.height - monkey.size.height / 2;
-    int rangeY = maxY - minY;
-    int actualY = (arc4random() % rangeY) + minY;
+    if(theModeSelected == EASY_MODE)
+    {
+        // Determine where to spawn the monkey along the Y axis
+        int minY = monkey.size.height / 2;
+        int maxY = self.frame.size.height - monkey.size.height / 2;
+        int rangeY = maxY - minY;
+        int actualY = (arc4random() % rangeY) + minY;
+        
+        int minX = monkey.size.width / 2;
+        int maxX = self.frame.size.width - monkey.size.width / 2;
+        int rangeX = maxX - minX;
+        int actualX = (arc4random() % rangeX) + minX;
+        
+        // Create the monkey slightly off-screen along the right edge,
+        // and along a random position along the Y axis as calculated above
+        monkey.position = CGPointMake(actualX, actualY);
+        [self addChild:monkey];
+    }
+    else
+    {
+        // Determine where to spawn the monkey along the Y axis
+        int minY = monkey.size.height / 2;
+        int maxY = self.frame.size.height - monkey.size.height / 2;
+        int rangeY = maxY - minY;
+        int actualY = (arc4random() % rangeY) + minY;
+        
+        // Create the monkey slightly off-screen along the right edge,
+        // and along a random position along the Y axis as calculated above
+        monkey.position = CGPointMake(self.frame.size.width + monkey.size.width/2, actualY);
+        [self addChild:monkey];
  
-    // Create the monkey slightly off-screen along the right edge,
-    // and along a random position along the Y axis as calculated above
-    monkey.position = CGPointMake(self.frame.size.width + monkey.size.width/2, actualY);
-    [self addChild:monkey];
- 
-    // Determine speed of the monkey
-    int minDuration = 2.0;
-    int maxDuration = 4.0;
-    int rangeDuration = maxDuration - minDuration;
-    int actualDuration = (arc4random() % rangeDuration) + minDuration;
- 
-    // Create the actions
-    SKAction * actionMove = [SKAction moveTo:CGPointMake(-monkey.size.width/2, actualY) duration:actualDuration];
-    SKAction * actionMoveDone = [SKAction removeFromParent];
-    SKAction * loseAction = [SKAction runBlock:^{
+        // Create the actions
+        SKAction * actionMove = [SKAction moveTo:CGPointMake(-monkey.size.width/2, actualY) duration:actualDuration];
+        SKAction * actionMoveDone = [SKAction removeFromParent];
+        SKAction * loseAction = [SKAction runBlock:^{
         SKTransition *reveal = [SKTransition flipHorizontalWithDuration:0.5];
         SKScene * gameOverScene = [[GameOverScene alloc] initWithSize:self.size won:NO];
         [self.view presentScene:gameOverScene transition: reveal];
-    }];
-    [monkey runAction:[SKAction sequence:@[actionMove, loseAction, actionMoveDone]]];
- 
+        }];
+        [monkey runAction:[SKAction sequence:@[actionMove, loseAction, actionMoveDone]]];
+    }
 }
 
 - (void)updateWithTimeSinceLastUpdate:(CFTimeInterval)timeSinceLast {
  
     self.lastSpawnTimeInterval += timeSinceLast;
-    if (self.lastSpawnTimeInterval > 1) {
-        switch (theMonkeyType)
-        {
-            case NORMAL:
-                theMonkeyType = FAT;
-                break;
-            case FAT:
-                theMonkeyType = FRENZY;
-                break;
-            case FRENZY:
-                theMonkeyType = NORMAL;
-                break;
-            default:
-                theMonkeyType = NORMAL;
-                break;
+    
+    if(theModeSelected == EASY_MODE)
+    {
+        if (self.lastSpawnTimeInterval > 3) {
+            switch (theMonkeyType)
+            {
+                case NORMAL:
+                    theMonkeyType = FAT;
+                    break;
+                case FAT:
+                    theMonkeyType = NORMAL;
+                    break;
+                default:
+                    theMonkeyType = NORMAL;
+                    break;
+            }
+            self.lastSpawnTimeInterval = 0;
+            [self addMonkey:theMonkeyType];
         }
-        self.lastSpawnTimeInterval = 0;
-        [self addMonkey:theMonkeyType];
+    }
+    else
+    {
+        if (self.lastSpawnTimeInterval > 1) {
+            switch (theMonkeyType)
+            {
+                case NORMAL:
+                    theMonkeyType = FAT;
+                    break;
+                case FAT:
+                    theMonkeyType = FRENZY;
+                    break;
+                case FRENZY:
+                    theMonkeyType = NORMAL;
+                    break;
+                default:
+                    theMonkeyType = NORMAL;
+                    break;
+            }
+            self.lastSpawnTimeInterval = 0;
+            [self addMonkey:theMonkeyType];
+        }
     }
 }
 
@@ -163,6 +231,12 @@ MonkeyType theMonkeyType;
 
 -(void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
  
+    if(displayLabel)
+    {
+        displayLabel = false;
+        [label removeFromParent];
+    }
+    
     [self runAction:[SKAction playSoundFileNamed:@"throwing.m4a" waitForCompletion:NO]];
  
     // 1 - Choose one of the touches to work with
@@ -207,17 +281,24 @@ MonkeyType theMonkeyType;
 }
 
 - (void)banana:(SKSpriteNode *)banana didCollideWithMonkey:(SKSpriteNode *)monkey {
-    NSLog(@"Hit");
-    
-    [self runAction:[SKAction playSoundFileNamed:@"monkeySound.m4a" waitForCompletion:NO]];
     
     [banana removeFromParent];
-    [monkey removeFromParent];
-    self.monkeysFed++;
-    if (self.monkeysFed > 30) {
-        SKTransition *reveal = [SKTransition flipHorizontalWithDuration:0.5];
-        SKScene * gameOverScene = [[GameOverScene alloc] initWithSize:self.size won:YES];
-        [self.view presentScene:gameOverScene transition: reveal];
+    int checkHealth = [[monkey.userData valueForKey:@"Health"] intValue];
+    if (checkHealth <= 1)
+    {
+       [self runAction:[SKAction playSoundFileNamed:@"monkeySound.m4a" waitForCompletion:NO]];
+        
+       [monkey removeFromParent];
+       self.monkeysFed++;
+       if (self.monkeysFed > 30) {
+           SKTransition *reveal = [SKTransition flipHorizontalWithDuration:0.5];
+           SKScene * gameOverScene = [[GameOverScene alloc] initWithSize:self.size won:YES];
+           [self.view presentScene:gameOverScene transition: reveal];
+       }
+    }
+    else
+    {
+        [monkey.userData setObject:[NSNumber numberWithInt:(--checkHealth)] forKey:@"Health"];
     }
 }
 

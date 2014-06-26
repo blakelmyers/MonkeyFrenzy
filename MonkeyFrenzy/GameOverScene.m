@@ -3,6 +3,7 @@
 //  MonkeyFrenzy
 //
 //  Created by Myers on 6/14/14.
+//  Copyright (c) Blake Myers All rights reserved.
 //
 
 
@@ -26,7 +27,7 @@
         }
  
         // 3
-        SKLabelNode *label = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
+        SKLabelNode *label = [SKLabelNode labelNodeWithFontNamed:@"Menlo-Regular"];
         label.text = message;
         label.fontSize = 25;
         label.fontColor = [SKColor blackColor];

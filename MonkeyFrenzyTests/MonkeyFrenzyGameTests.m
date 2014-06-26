@@ -1,18 +1,18 @@
 //
-//  SpriteKitSimpleGameTests.m
-//  SpriteKitSimpleGameTests
+//  MonkeyFrenzyGameTests.m
+//  MonkeyFrenzy
 //
-//  Created by Main Account on 9/4/13.
-//  Copyright (c) 2013 Razeware LLC. All rights reserved.
+//  Created by Myers on 6/14/14.
+//  Copyright (c) Blake Myers All rights reserved.
 //
 
 #import <XCTest/XCTest.h>
 
-@interface SpriteKitSimpleGameTests : XCTestCase
+@interface MonkeyFrenzyGameTests : XCTestCase
 
 @end
 
-@implementation SpriteKitSimpleGameTests
+@implementation MonkeyFrenzyGameTests
 
 - (void)setUp
 {
