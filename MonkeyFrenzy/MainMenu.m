@@ -8,6 +8,7 @@
 
 #import "MainMenu.h"
 #import "GameScene.h"
+#import "CreditsMenu.h"
 
 @implementation MainMenu
 
@@ -17,7 +18,6 @@
         
         self.backgroundColor = [SKColor colorWithRed:0.0 green:0.0 blue:1.0 alpha:1.0];
         
-        self.backgroundColor = [SKColor colorWithRed:0.0 green:1.0 blue:0.0 alpha:1.0];
         SKSpriteNode *bgImage = [SKSpriteNode spriteNodeWithImageNamed:@"Background"];
         bgImage.position = CGPointMake(self.size.width/2, self.size.height/2);
         [self addChild:bgImage];
@@ -27,6 +27,7 @@
         
         SKLabelNode *label = [SKLabelNode labelNodeWithFontNamed:@"Menlo-Regular"];
         label.text = message;
+        label.name = @"test";
         label.fontSize = 22;
         label.fontColor = [SKColor blackColor];
         label.position = CGPointMake(self.size.width/2, self.size.height/2.5);
@@ -81,6 +82,17 @@
         label4.position = CGPointMake(self.size.width/1.2, self.size.height/3.7);
         [self addChild:label4];
         
+        NSString *menuMessage;
+        menuMessage = @"CREDITS";
+        
+        SKLabelNode *menuLabel = [SKLabelNode labelNodeWithFontNamed:@"Menlo-Regular"];
+        menuLabel.text = menuMessage;
+        menuLabel.fontSize = 20;
+        menuLabel.name = @"credits";
+        menuLabel.fontColor = [SKColor blackColor];
+        menuLabel.position = CGPointMake(self.size.width/1.1, self.size.height/1.1);
+        [self addChild:menuLabel];
+        
     }
     return self;
 }
@@ -101,6 +113,19 @@
     }
     if ([node.name isEqualToString:@"Frenzy"]) {
         selection = FRENZY_MODE;
+    }
+    if ([node.name isEqualToString:@"credits"]) {
+        [self runAction:
+         [SKAction sequence:@[
+                              [SKAction runBlock:^{
+             // 5
+             SKTransition *reveal = [SKTransition flipVerticalWithDuration:0.5];
+             SKScene * myScene = [[CreditsMenu alloc] initWithSize:self.size];
+             [self.view presentScene:myScene transition: reveal];
+         }]
+                              ]]
+         ];
+        return;
     }
     if(node.name)
     {

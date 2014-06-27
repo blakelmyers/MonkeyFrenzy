@@ -7,6 +7,7 @@
 
 #import "GameScene.h"
 #import "GameOverScene.h"
+#import "MainMenu.h"
 
 static const uint32_t bananaCategory     =  0x1 << 0;
 static const uint32_t monkeyCategory        =  0x1 << 1;
@@ -17,6 +18,12 @@ static const uint32_t monkeyCategory        =  0x1 << 1;
 @property (nonatomic) NSTimeInterval lastSpawnTimeInterval;
 @property (nonatomic) NSTimeInterval lastUpdateTimeInterval;
 @property (nonatomic) int monkeysFed;
+@property (nonatomic) MonkeyType theMonkeyType;
+@property (nonatomic) ModeType theModeSelected;
+@property (nonatomic) BOOL displayLabel;;
+@property (nonatomic) SKLabelNode *label;
+@property (nonatomic) int bananaCount;
+@property (nonatomic) int frenzyCount;
 @end
 
 static inline CGPoint rwAdd(CGPoint a, CGPoint b) {
@@ -43,17 +50,16 @@ static inline CGPoint rwNormalize(CGPoint a) {
 
 @implementation GameScene
 
-MonkeyType theMonkeyType;
-ModeType theModeSelected;
-BOOL displayLabel = true;
-SKLabelNode *label;
-int bananaCount = 0;
+
 
 -(id)initWithSize:(CGSize)size mode:(ModeType)modePicked{
     if (self = [super initWithSize:size]) {
 
-        theModeSelected = modePicked;
- 
+        self.theModeSelected = modePicked;
+        self.displayLabel = true;
+        self.frenzyCount = 0;
+        self.bananaCount = 0;
+
         self.backgroundColor = [SKColor colorWithRed:0.0 green:1.0 blue:0.0 alpha:1.0];
         SKSpriteNode *bgImage = [SKSpriteNode spriteNodeWithImageNamed:@"Background"];
         bgImage.position = CGPointMake(self.size.width/2, self.size.height/2);
@@ -66,18 +72,35 @@ int bananaCount = 0;
         self.physicsWorld.gravity = CGVectorMake(0,0);
         self.physicsWorld.contactDelegate = self;
         
-        theMonkeyType = FRENZY;
+        self.theMonkeyType = FRENZY;
         
         NSString *message;
-        message = @"Tap to throw Bananas to feed the monkeys.";
+        if(self.theModeSelected == FRENZY_MODE)
+        {
+            message = @"0";
+        }
+        else
+        {
+            message = @"Tap to throw Bananas to feed the monkeys.";
+        }
         
-        // 3
-        label = [SKLabelNode labelNodeWithFontNamed:@"Menlo-Regular"];
-        label.text = message;
-        label.fontSize = 15;
-        label.fontColor = [SKColor blackColor];
-        label.position = CGPointMake(self.size.width/2, self.size.height/2);
-        [self addChild:label];
+        self.label = [SKLabelNode labelNodeWithFontNamed:@"Menlo-Regular"];
+        self.label.text = message;
+        self.label.fontSize = 15;
+        self.label.fontColor = [SKColor blackColor];
+        self.label.position = CGPointMake(self.size.width/2, self.size.height/2);
+        [self addChild:self.label];
+        
+        NSString *menuMessage;
+        menuMessage = @"MENU";
+        
+        SKLabelNode *menuLabel = [SKLabelNode labelNodeWithFontNamed:@"Menlo-Regular"];
+        menuLabel.text = menuMessage;
+        menuLabel.fontSize = 20;
+        menuLabel.name = @"menu";
+        menuLabel.fontColor = [SKColor blackColor];
+        menuLabel.position = CGPointMake(self.size.width/12, self.size.height/1.1);
+        [self addChild:menuLabel];
  
     }
     return self;
@@ -109,7 +132,14 @@ int bananaCount = 0;
         case FRENZY:
             monkey = [SKSpriteNode spriteNodeWithImageNamed:@"frenzyMonkey"];
             [dict setObject:[NSNumber numberWithInt:1] forKey:@"Health"];
-            actualDuration = 2.0;
+            if(self.theModeSelected == FRENZY_MODE)
+            {
+                actualDuration = 1.7;
+            }
+            else
+            {
+                actualDuration = 2.0;
+            }
             break;
         default:
             monkey = [SKSpriteNode spriteNodeWithImageNamed:@"monkey"];
@@ -126,7 +156,7 @@ int bananaCount = 0;
     monkey.physicsBody.contactTestBitMask = bananaCategory; // 4
     monkey.physicsBody.collisionBitMask = 0; // 5
   
-    if(theModeSelected == EASY_MODE)
+    if(self.theModeSelected == EASY_MODE)
     {
         // Determine where to spawn the monkey along the Y axis
         int minY = monkey.size.height / 2;
@@ -162,7 +192,7 @@ int bananaCount = 0;
         SKAction * actionMoveDone = [SKAction removeFromParent];
         SKAction * loseAction = [SKAction runBlock:^{
         SKTransition *reveal = [SKTransition flipHorizontalWithDuration:0.5];
-            SKScene * gameOverScene = [[GameOverScene alloc] initWithSize:self.size won:NO mode:theModeSelected];
+            SKScene * gameOverScene = [[GameOverScene alloc] initWithSize:self.size won:NO mode:self.theModeSelected];
         [self.view presentScene:gameOverScene transition: reveal];
         }];
         [monkey runAction:[SKAction sequence:@[actionMove, loseAction, actionMoveDone]]];
@@ -173,71 +203,54 @@ int bananaCount = 0;
  
     self.lastSpawnTimeInterval += timeSinceLast;
     
-    if(theModeSelected == EASY_MODE)
+    if(self.theModeSelected == EASY_MODE)
     {
         if (self.lastSpawnTimeInterval > 3) {
-            switch (theMonkeyType)
+            switch (self.theMonkeyType)
             {
                 case NORMAL:
-                    theMonkeyType = FAT;
+                    self.theMonkeyType = FAT;
                     break;
                 case FAT:
-                    theMonkeyType = NORMAL;
+                    self.theMonkeyType = NORMAL;
                     break;
                 default:
-                    theMonkeyType = NORMAL;
+                    self.theMonkeyType = NORMAL;
                     break;
             }
             self.lastSpawnTimeInterval = 0;
-            [self addMonkey:theMonkeyType];
+            [self addMonkey:self.theMonkeyType];
         }
     }
-    else if (theModeSelected == NORMAL_MODE)
+    else if (self.theModeSelected == NORMAL_MODE)
     {
         if (self.lastSpawnTimeInterval > 1) {
-            switch (theMonkeyType)
+            switch (self.theMonkeyType)
             {
                 case NORMAL:
-                    theMonkeyType = FAT;
+                    self.theMonkeyType = FAT;
                     break;
                 case FAT:
-                    theMonkeyType = FRENZY;
+                    self.theMonkeyType = FRENZY;
                     break;
                 case FRENZY:
-                    theMonkeyType = NORMAL;
+                    self.theMonkeyType = NORMAL;
                     break;
                 default:
-                    theMonkeyType = NORMAL;
+                    self.theMonkeyType = NORMAL;
                     break;
             }
             self.lastSpawnTimeInterval = 0;
-            [self addMonkey:theMonkeyType];
+            [self addMonkey:self.theMonkeyType];
         }
     }
     else   // FRENZY_MODE
     {
-        if (self.lastSpawnTimeInterval > 1) {
-            switch (theMonkeyType)
-            {
-                case NORMAL:
-                    theMonkeyType = FAT;
-                    bananaCount += 5;
-                    break;
-                case FAT:
-                    theMonkeyType = FRENZY;
-                    bananaCount += 1;
-                    break;
-                case FRENZY:
-                    theMonkeyType = NORMAL;
-                    bananaCount += 2;
-                    break;
-                default:
-                    theMonkeyType = NORMAL;
-                    bananaCount += 2;
-                    break;
-            }
+        if (self.lastSpawnTimeInterval > 0.6) {
+            self.theMonkeyType = FRENZY;
+            ++self.bananaCount;
             self.lastSpawnTimeInterval = 0;
-            [self addMonkey:theMonkeyType];
+            [self addMonkey:self.theMonkeyType];
         }
     }
 }
@@ -258,16 +271,31 @@ int bananaCount = 0;
 
 -(void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
  
-    if(displayLabel)
+    if(self.displayLabel && self.theModeSelected != FRENZY_MODE)
     {
-        displayLabel = false;
-        [label removeFromParent];
+        self.displayLabel = false;
+        [self.label removeFromParent];
     }
-    
  
     // 1 - Choose one of the touches to work with
     UITouch * touch = [touches anyObject];
     CGPoint location = [touch locationInNode:self];
+    
+    SKNode *node = [self nodeAtPoint:location];
+    
+    if ([node.name isEqualToString:@"menu"]) {
+        [self runAction:
+         [SKAction sequence:@[
+                              [SKAction runBlock:^{
+             // 5
+             SKTransition *reveal = [SKTransition flipVerticalWithDuration:0.5];
+             SKScene * myScene = [[MainMenu alloc] initWithSize:self.size];
+             [self.view presentScene:myScene transition: reveal];
+         }]
+                              ]]
+         ];
+        return;
+    }
  
     // 2 - Set up initial location of banana
     SKSpriteNode * banana = [SKSpriteNode spriteNodeWithImageNamed:@"Bananas"];
@@ -286,15 +314,14 @@ int bananaCount = 0;
     if (offset.x <= 0) return;
  
     // 5 - OK to add now - we've double checked position
-    if(theModeSelected != FRENZY_MODE)
+    if(self.theModeSelected != FRENZY_MODE)
     {
         [self addChild:banana];
         [self runAction:[SKAction playSoundFileNamed:@"throwing.m4a" waitForCompletion:NO]];
     }
     else  // have limited bananas in Frenzy mode
     {
-        NSLog(@"%d", bananaCount);
-        if(bananaCount > 0)
+        if(self.bananaCount > 0)
         {
             [self addChild:banana];
             [self runAction:[SKAction playSoundFileNamed:@"throwing.m4a" waitForCompletion:NO]];
@@ -316,15 +343,15 @@ int bananaCount = 0;
     SKAction * actionMove = [SKAction moveTo:realDest duration:realMoveDuration];
     SKAction * actionMoveDone = [SKAction removeFromParent];
     
-    if(theModeSelected != FRENZY_MODE)
+    if(self.theModeSelected != FRENZY_MODE)
     {
         [banana runAction:[SKAction sequence:@[actionMove, actionMoveDone]]];
     }
     else  // have limited bananas in Frenzy mode
     {
-        if(bananaCount > 0)
+        if(self.bananaCount > 0)
         {
-            --bananaCount;
+            --self.bananaCount;
             [banana runAction:[SKAction sequence:@[actionMove, actionMoveDone]]];
         }
     }
@@ -337,15 +364,23 @@ int bananaCount = 0;
     int checkHealth = [[monkey.userData valueForKey:@"Health"] intValue];
     if (checkHealth <= 1)
     {
-       [self runAction:[SKAction playSoundFileNamed:@"monkeySound.m4a" waitForCompletion:NO]];
+        [self runAction:[SKAction playSoundFileNamed:@"monkeySound.m4a" waitForCompletion:NO]];
         
-       [monkey removeFromParent];
-       self.monkeysFed++;
-       if (self.monkeysFed > 30) {
-           SKTransition *reveal = [SKTransition flipHorizontalWithDuration:0.5];
-           SKScene * gameOverScene = [[GameOverScene alloc] initWithSize:self.size won:YES mode:theModeSelected];
-           [self.view presentScene:gameOverScene transition: reveal];
-       }
+        [monkey removeFromParent];
+        if(self.theModeSelected == FRENZY_MODE)
+        {
+            self.frenzyCount++;
+            self.label.text = [NSString stringWithFormat:@"%d", self.frenzyCount];
+        }
+        else
+        {
+            self.monkeysFed++;
+            if (self.monkeysFed > 30) {
+                SKTransition *reveal = [SKTransition flipHorizontalWithDuration:0.5];
+                SKScene * gameOverScene = [[GameOverScene alloc] initWithSize:self.size won:YES mode:self.theModeSelected];
+                [self.view presentScene:gameOverScene transition: reveal];
+            }
+        }
     }
     else
     {
