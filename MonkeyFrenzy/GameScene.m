@@ -101,6 +101,19 @@ static inline CGPoint rwNormalize(CGPoint a) {
         menuLabel.fontColor = [SKColor blackColor];
         menuLabel.position = CGPointMake(self.size.width/12, self.size.height/1.1);
         [self addChild:menuLabel];
+        
+        if(self.theModeSelected == FRENZY_MODE)
+        {
+            NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        
+            NSString * highScore = [NSString stringWithFormat:@"High Score: %d", [[defaults objectForKey:@"frenzyScore"] intValue]];
+            SKLabelNode *label2 = [SKLabelNode labelNodeWithFontNamed:@"Menlo-Regular"];
+            label2.text = highScore;
+            label2.fontSize = 20;
+            label2.fontColor = [SKColor blackColor];
+            label2.position = CGPointMake(self.size.width/2, self.size.height/1.1);
+            [self addChild:label2];
+        }
  
     }
     return self;
@@ -190,9 +203,17 @@ static inline CGPoint rwNormalize(CGPoint a) {
         // Create the actions
         SKAction * actionMove = [SKAction moveTo:CGPointMake(-monkey.size.width/2, actualY) duration:actualDuration];
         SKAction * actionMoveDone = [SKAction removeFromParent];
+        
+        int scoreIfFrenzy = 0;
+        
+        if(self.theModeSelected == FRENZY_MODE)
+        {
+            scoreIfFrenzy = self.frenzyCount;
+            ++scoreIfFrenzy;
+        }
         SKAction * loseAction = [SKAction runBlock:^{
         SKTransition *reveal = [SKTransition flipHorizontalWithDuration:0.5];
-            SKScene * gameOverScene = [[GameOverScene alloc] initWithSize:self.size won:NO mode:self.theModeSelected];
+            SKScene * gameOverScene = [[GameOverScene alloc] initWithSize:self.size won:NO mode:self.theModeSelected score:scoreIfFrenzy];
         [self.view presentScene:gameOverScene transition: reveal];
         }];
         [monkey runAction:[SKAction sequence:@[actionMove, loseAction, actionMoveDone]]];
@@ -369,7 +390,7 @@ static inline CGPoint rwNormalize(CGPoint a) {
         [monkey removeFromParent];
         if(self.theModeSelected == FRENZY_MODE)
         {
-            self.frenzyCount++;
+            ++self.frenzyCount;
             self.label.text = [NSString stringWithFormat:@"%d", self.frenzyCount];
         }
         else
@@ -377,7 +398,7 @@ static inline CGPoint rwNormalize(CGPoint a) {
             self.monkeysFed++;
             if (self.monkeysFed > 30) {
                 SKTransition *reveal = [SKTransition flipHorizontalWithDuration:0.5];
-                SKScene * gameOverScene = [[GameOverScene alloc] initWithSize:self.size won:YES mode:self.theModeSelected];
+                SKScene * gameOverScene = [[GameOverScene alloc] initWithSize:self.size won:YES mode:self.theModeSelected score:0];
                 [self.view presentScene:gameOverScene transition: reveal];
             }
         }

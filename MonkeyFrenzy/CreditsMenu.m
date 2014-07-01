@@ -22,6 +22,9 @@
         NSString * message;
         message = @"CREDITS";
 
+        SKSpriteNode *player = [SKSpriteNode spriteNodeWithImageNamed:@"Zookeeper_Female"];
+        player.position = CGPointMake(player.size.width/2, self.frame.size.height/1.5);
+        [self addChild:player];
         
         SKLabelNode *label = [SKLabelNode labelNodeWithFontNamed:@"Menlo-Regular"];
         label.text = message;
@@ -59,6 +62,16 @@
         label2.fontColor = [SKColor blackColor];
         label2.position = CGPointMake(self.size.width/2, self.size.height/2.6);
         [self addChild:label2];
+        
+        NSString *message5;
+        message5 = @"SimpleSpriteKitGame from www.raywenderlich.com";
+        
+        SKLabelNode *label5 = [SKLabelNode labelNodeWithFontNamed:@"Menlo-Regular"];
+        label5.text = message5;
+        label5.fontSize = 16;
+        label5.fontColor = [SKColor blackColor];
+        label5.position = CGPointMake(self.size.width/2, self.size.height/3.3);
+        [self addChild:label5];
         
         NSString *menuMessage;
         menuMessage = @"MENU";

@@ -14,13 +14,33 @@
 
 ModeType theModeSelected;
 
--(id)initWithSize:(CGSize)size won:(BOOL)won mode:(ModeType)modePicked{
+-(id)initWithSize:(CGSize)size won:(BOOL)won mode:(ModeType)modePicked score:(int)gameScore{
     if (self = [super initWithSize:size]) {
  
         theModeSelected = modePicked;
         // 1
         self.backgroundColor = [SKColor colorWithRed:1.0 green:1.0 blue:0.0 alpha:1.0];
         
+        if(modePicked == FRENZY)
+        {
+            // Store the data
+            NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+            
+            if(gameScore > [[defaults objectForKey:@"frenzyScore"] intValue])
+            {
+                [defaults setObject:[NSNumber numberWithInteger:gameScore] forKey:@"frenzyScore"];
+                [defaults synchronize];
+            }
+            
+            NSString * highScore = [NSString stringWithFormat:@"High Score: %d", [[defaults objectForKey:@"frenzyScore"] intValue]];
+            SKLabelNode *label2 = [SKLabelNode labelNodeWithFontNamed:@"Menlo-Regular"];
+            label2.text = highScore;
+            label2.fontSize = 25;
+            label2.fontColor = [SKColor blackColor];
+            label2.position = CGPointMake(self.size.width/2, self.size.height/1.1);
+            [self addChild:label2];
+        
+        }
         // 2
         NSString * message;
         if (won) {
@@ -36,6 +56,8 @@ ModeType theModeSelected;
         label.fontColor = [SKColor blackColor];
         label.position = CGPointMake(self.size.width/2, self.size.height/2);
         [self addChild:label];
+        
+        
  
         // 4
         [self runAction:

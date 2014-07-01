@@ -10,6 +10,6 @@
  
 @interface GameOverScene : SKScene
  
--(id)initWithSize:(CGSize)size won:(BOOL)won mode:(ModeType)modePicked;
+-(id)initWithSize:(CGSize)size won:(BOOL)won mode:(ModeType)modePicked score:(int)gameScore;
  
 @end
