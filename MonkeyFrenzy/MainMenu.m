@@ -10,6 +10,10 @@
 #import "GameScene.h"
 #import "CreditsMenu.h"
 
+
+@interface MainMenu ()
+@end
+
 @implementation MainMenu
 
 
@@ -23,7 +27,7 @@
         [self addChild:bgImage];
         
         NSString *message;
-        message = @"Select a Mode";
+        message = @"SELECTE A MODE";
         
         SKLabelNode *label = [SKLabelNode labelNodeWithFontNamed:@"Menlo-Regular"];
         label.text = message;
@@ -38,30 +42,33 @@
         [self addChild:title];
         
         SKSpriteNode * easyBtn = [SKSpriteNode spriteNodeWithImageNamed:@"monkey"];
-        easyBtn.position = CGPointMake(self.size.width/6, self.size.height/6);
+        easyBtn.position = CGPointMake(self.size.width/3, self.size.height/6);
         easyBtn.name = @"Easy";
         [self addChild:easyBtn];
         
-        SKSpriteNode * normalBtn = [SKSpriteNode spriteNodeWithImageNamed:@"fatMonkey"];
+        /*
+        SKSpriteNode * normalBtn = [SKSpriteNode spriteNodeWithImageNamed:@"monkeyBig"];
         normalBtn.position = CGPointMake(self.size.width/2, self.size.height/6);
         normalBtn.name = @"Normal";
         [self addChild:normalBtn];
+        */
         
         SKSpriteNode *frenzyBtn = [SKSpriteNode spriteNodeWithImageNamed:@"frenzyMonkey"];
-        frenzyBtn.position = CGPointMake(self.size.width/1.2, self.size.height/6);
+        frenzyBtn.position = CGPointMake(self.size.width/1.5, self.size.height/6);
         frenzyBtn.name = @"Frenzy";
         [self addChild:frenzyBtn];
         
         NSString *message2;
-        message2 = @"Easy";
+        message2 = @"EASY";
         
         SKLabelNode *label2 = [SKLabelNode labelNodeWithFontNamed:@"Menlo-Regular"];
         label2.text = message2;
         label2.fontSize = 18;
         label2.fontColor = [SKColor blackColor];
-        label2.position = CGPointMake(self.size.width/6, self.size.height/3.7);
+        label2.position = CGPointMake(self.size.width/3, self.size.height/3.7);
         [self addChild:label2];
         
+        /*
         NSString *message3;
         message3 = @"Normal";
         
@@ -71,15 +78,16 @@
         label3.fontColor = [SKColor blackColor];
         label3.position = CGPointMake(self.size.width/2, self.size.height/3.7);
         [self addChild:label3];
+        */
         
         NSString *message4;
-        message4 = @"Frenzy";
+        message4 = @"FRENZY";
         
         SKLabelNode *label4 = [SKLabelNode labelNodeWithFontNamed:@"Menlo-Regular"];
         label4.text = message4;
         label4.fontSize = 18;
         label4.fontColor = [SKColor blackColor];
-        label4.position = CGPointMake(self.size.width/1.2, self.size.height/3.7);
+        label4.position = CGPointMake(self.size.width/1.5, self.size.height/3.7);
         [self addChild:label4];
         
         NSString *menuMessage;
@@ -91,7 +99,15 @@
         menuLabel.name = @"credits";
         menuLabel.fontColor = [SKColor blackColor];
         menuLabel.position = CGPointMake(self.size.width/1.1, self.size.height/1.1);
+        
+        SKSpriteNode *creditBack = [SKSpriteNode spriteNodeWithColor:[UIColor greenColor] size:CGSizeMake(menuLabel.frame.size.width, menuLabel.frame.size.height)];
+        creditBack.position = CGPointMake(self.size.width/1.1, self.size.height/1.07);
+        
+        [self addChild:creditBack];
         [self addChild:menuLabel];
+        
+        
+        //[self addChild:menuLabel];
         
     }
     return self;

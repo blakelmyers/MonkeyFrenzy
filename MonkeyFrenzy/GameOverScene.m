@@ -23,6 +23,9 @@ ModeType theModeSelected;
         
         if(modePicked == FRENZY)
         {
+            
+            [self runAction:[SKAction playSoundFileNamed:@"monkeySound.m4a" waitForCompletion:NO]];
+            
             // Store the data
             NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
             
@@ -32,7 +35,7 @@ ModeType theModeSelected;
                 [defaults synchronize];
             }
             
-            NSString * highScore = [NSString stringWithFormat:@"High Score: %d", [[defaults objectForKey:@"frenzyScore"] intValue]];
+            NSString * highScore = [NSString stringWithFormat:@"HIGH SCORE: %d", [[defaults objectForKey:@"frenzyScore"] intValue]];
             SKLabelNode *label2 = [SKLabelNode labelNodeWithFontNamed:@"Menlo-Regular"];
             label2.text = highScore;
             label2.fontSize = 25;
@@ -46,7 +49,7 @@ ModeType theModeSelected;
         if (won) {
             message = @"You Fed All the Monkeys!";
         } else {
-            message = @"Oh No, the Monkeys Got Past!";
+            message = @"OH NO, THE MONKEY GOT PAST!";
         }
  
         // 3
@@ -58,8 +61,19 @@ ModeType theModeSelected;
         [self addChild:label];
         
         
+        NSString *tryMessage;
+        tryMessage = @"TRY AGAIN ?";
+        
+        SKLabelNode *tryLabel = [SKLabelNode labelNodeWithFontNamed:@"Menlo-Regular"];
+        tryLabel.text = tryMessage;
+        tryLabel.fontSize = 30;
+        tryLabel.name = @"try";
+        tryLabel.fontColor = [SKColor blackColor];
+        tryLabel.position = CGPointMake(self.size.width/2, self.size.height/5);
  
-        // 4
+        [self addChild:tryLabel];
+        
+       /*
         [self runAction:
             [SKAction sequence:@[
                 [SKAction waitForDuration:3.0],
@@ -71,9 +85,34 @@ ModeType theModeSelected;
                 }]
             ]]
         ];
+        */
  
     }
     return self;
+}
+
+-(void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
+    
+    
+    // 1 - Choose one of the touches to work with
+    UITouch * touch = [touches anyObject];
+    CGPoint location = [touch locationInNode:self];
+    
+    SKNode *node = [self nodeAtPoint:location];
+    
+    if ([node.name isEqualToString:@"try"]) {
+        [self runAction:
+         [SKAction sequence:@[
+                              [SKAction runBlock:^{
+             // 5
+             SKTransition *reveal = [SKTransition flipHorizontalWithDuration:0.5];
+             SKScene * myScene = [[GameScene alloc] initWithSize:self.size mode:theModeSelected];
+             [self.view presentScene:myScene transition: reveal];
+         }]
+                              ]]
+         ];
+        return;
+    }
 }
  
 @end

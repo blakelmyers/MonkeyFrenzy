@@ -24,10 +24,11 @@
 {
     [super viewWillLayoutSubviews];
     NSError *error;
-    NSURL * backgroundMusicURL = [[NSBundle mainBundle] URLForResource:@"Snappy" withExtension:@"mp3"];
+    NSURL * backgroundMusicURL = [[NSBundle mainBundle] URLForResource:@"BanjoHop" withExtension:@"mp3"];
     self.backgroundMusicPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:backgroundMusicURL error:&error];
     self.backgroundMusicPlayer.numberOfLoops = -1;
     [self.backgroundMusicPlayer prepareToPlay];
+    [self.backgroundMusicPlayer setVolume:0.4];
     [self.backgroundMusicPlayer play];
 
     // Configure the view.

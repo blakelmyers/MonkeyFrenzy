@@ -81,7 +81,7 @@ static inline CGPoint rwNormalize(CGPoint a) {
         }
         else
         {
-            message = @"Tap to throw Bananas to feed the monkeys.";
+            message = @"TAP TO THROW BANANAS AND FEED THE MONKEYS";
         }
         
         self.label = [SKLabelNode labelNodeWithFontNamed:@"Menlo-Regular"];
@@ -100,13 +100,18 @@ static inline CGPoint rwNormalize(CGPoint a) {
         menuLabel.name = @"menu";
         menuLabel.fontColor = [SKColor blackColor];
         menuLabel.position = CGPointMake(self.size.width/12, self.size.height/1.1);
+        
+        SKSpriteNode *menuBack = [SKSpriteNode spriteNodeWithColor:[UIColor greenColor] size:CGSizeMake(menuLabel.frame.size.width, menuLabel.frame.size.height)];
+        menuBack.position = CGPointMake(self.size.width/12, self.size.height/1.07);
+        
+        [self addChild:menuBack]; 
         [self addChild:menuLabel];
         
         if(self.theModeSelected == FRENZY_MODE)
         {
             NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
         
-            NSString * highScore = [NSString stringWithFormat:@"High Score: %d", [[defaults objectForKey:@"frenzyScore"] intValue]];
+            NSString * highScore = [NSString stringWithFormat:@"HIGH SCORE: %d", [[defaults objectForKey:@"frenzyScore"] intValue]];
             SKLabelNode *label2 = [SKLabelNode labelNodeWithFontNamed:@"Menlo-Regular"];
             label2.text = highScore;
             label2.fontSize = 20;
@@ -138,7 +143,7 @@ static inline CGPoint rwNormalize(CGPoint a) {
             [dict setObject:[NSNumber numberWithInt:2] forKey:@"Health"];
             break;
         case FAT:
-            monkey = [SKSpriteNode spriteNodeWithImageNamed:@"fatMonkey"];
+            monkey = [SKSpriteNode spriteNodeWithImageNamed:@"monkeyBig"];
             [dict setObject:[NSNumber numberWithInt:5] forKey:@"Health"];
             actualDuration = 6.0;
             break;
@@ -212,6 +217,10 @@ static inline CGPoint rwNormalize(CGPoint a) {
             ++scoreIfFrenzy;
         }
         SKAction * loseAction = [SKAction runBlock:^{
+        if(self.theModeSelected == FRENZY_MODE)
+        {
+            [self runAction:[SKAction playSoundFileNamed:@"monkeySound.m4a" waitForCompletion:NO]];
+        }
         SKTransition *reveal = [SKTransition flipHorizontalWithDuration:0.5];
             SKScene * gameOverScene = [[GameOverScene alloc] initWithSize:self.size won:NO mode:self.theModeSelected score:scoreIfFrenzy];
         [self.view presentScene:gameOverScene transition: reveal];
@@ -334,7 +343,6 @@ static inline CGPoint rwNormalize(CGPoint a) {
     // 4 - Bail out if you are shooting down or backwards
     if (offset.x <= 0) return;
  
-    // 5 - OK to add now - we've double checked position
     if(self.theModeSelected != FRENZY_MODE)
     {
         [self addChild:banana];
@@ -385,7 +393,10 @@ static inline CGPoint rwNormalize(CGPoint a) {
     int checkHealth = [[monkey.userData valueForKey:@"Health"] intValue];
     if (checkHealth <= 1)
     {
-        [self runAction:[SKAction playSoundFileNamed:@"monkeySound.m4a" waitForCompletion:NO]];
+        if(self.theModeSelected != FRENZY_MODE)
+        {
+           [self runAction:[SKAction playSoundFileNamed:@"monkeySound.m4a" waitForCompletion:NO]];
+        }
         
         [monkey removeFromParent];
         if(self.theModeSelected == FRENZY_MODE)

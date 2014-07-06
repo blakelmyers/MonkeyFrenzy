@@ -23,25 +23,25 @@
 		35F3DF1417D8011E009EFFF2 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 35F3DEEF17D8011E009EFFF2 /* UIKit.framework */; };
 		35F3DF1C17D8011E009EFFF2 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 35F3DF1A17D8011E009EFFF2 /* InfoPlist.strings */; };
 		35F3DF1E17D8011E009EFFF2 /* MonkeyFrenzyGameTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 35F3DF1D17D8011E009EFFF2 /* MonkeyFrenzyGameTests.m */; };
-		35F3DF2B17D80158009EFFF2 /* background-music-aac.caf in Resources */ = {isa = PBXBuildFile; fileRef = 35F3DF2817D80158009EFFF2 /* background-music-aac.caf */; };
-		35F3DF2C17D80158009EFFF2 /* pew-pew-lei.caf in Resources */ = {isa = PBXBuildFile; fileRef = 35F3DF2917D80158009EFFF2 /* pew-pew-lei.caf */; };
 		35F3DF3017D803D6009EFFF2 /* GameOverScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 35F3DF2F17D803D6009EFFF2 /* GameOverScene.m */; };
 		B62E7505194E8F7C0025ECB3 /* TitlePic.png in Resources */ = {isa = PBXBuildFile; fileRef = B62E7501194E8F7C0025ECB3 /* TitlePic.png */; };
 		B637C465194BE488003EE8FD /* Bananas.png in Resources */ = {isa = PBXBuildFile; fileRef = B637C464194BE488003EE8FD /* Bananas.png */; };
-		B637C467194BE680003EE8FD /* Zookeeper.png in Resources */ = {isa = PBXBuildFile; fileRef = B637C466194BE67F003EE8FD /* Zookeeper.png */; };
 		B637C46D194CC293003EE8FD /* Snappy.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B637C46C194CC293003EE8FD /* Snappy.mp3 */; };
 		B637C471194CC40F003EE8FD /* throwing.m4a in Resources */ = {isa = PBXBuildFile; fileRef = B637C470194CC40F003EE8FD /* throwing.m4a */; };
 		B637C475194CC495003EE8FD /* monkeySound.m4a in Resources */ = {isa = PBXBuildFile; fileRef = B637C474194CC495003EE8FD /* monkeySound.m4a */; };
 		B637C479194CC778003EE8FD /* Background.png in Resources */ = {isa = PBXBuildFile; fileRef = B637C478194CC778003EE8FD /* Background.png */; };
-		B64E34C7194FDCA100A49862 /* fatMonkey.png in Resources */ = {isa = PBXBuildFile; fileRef = B64E34C6194FDCA100A49862 /* fatMonkey.png */; };
-		B64E34C9194FDCFE00A49862 /* frenzyMonkey.png in Resources */ = {isa = PBXBuildFile; fileRef = B64E34C8194FDCFE00A49862 /* frenzyMonkey.png */; };
-		B64E34CB194FDD6A00A49862 /* monkey.png in Resources */ = {isa = PBXBuildFile; fileRef = B64E34CA194FDD6A00A49862 /* monkey.png */; };
-		B668F506195BC70A0012AF81 /* app3.png in Resources */ = {isa = PBXBuildFile; fileRef = B668F505195BC70A0012AF81 /* app3.png */; };
-		B668F508195BC7690012AF81 /* app2.png in Resources */ = {isa = PBXBuildFile; fileRef = B668F507195BC7690012AF81 /* app2.png */; };
-		B668F50A195BC7A70012AF81 /* app1.png in Resources */ = {isa = PBXBuildFile; fileRef = B668F509195BC7A70012AF81 /* app1.png */; };
+		B64E34C9194FDCFE00A49862 /* oldFrenzyMonkey.png in Resources */ = {isa = PBXBuildFile; fileRef = B64E34C8194FDCFE00A49862 /* oldFrenzyMonkey.png */; };
+		B64E34CB194FDD6A00A49862 /* oldMonkey.png in Resources */ = {isa = PBXBuildFile; fileRef = B64E34CA194FDD6A00A49862 /* oldMonkey.png */; };
 		B668F50C195CC5230012AF81 /* Zookeeper_Female.png in Resources */ = {isa = PBXBuildFile; fileRef = B668F50B195CC5230012AF81 /* Zookeeper_Female.png */; };
 		B6B592AB194D314B006D85D5 /* MainMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = B6B592AA194D314B006D85D5 /* MainMenu.m */; };
 		B6B592AE194D33E8006D85D5 /* CreditsMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = B6B592AD194D33E8006D85D5 /* CreditsMenu.m */; };
+		B6EA093119688F0700BC8F93 /* BanjoHop.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B6EA093019688F0700BC8F93 /* BanjoHop.mp3 */; };
+		B6EA09331968A09600BC8F93 /* monkey.png in Resources */ = {isa = PBXBuildFile; fileRef = B6EA09321968A09500BC8F93 /* monkey.png */; };
+		B6EA09351968A4CD00BC8F93 /* frenzyMonkey.png in Resources */ = {isa = PBXBuildFile; fileRef = B6EA09341968A4CD00BC8F93 /* frenzyMonkey.png */; };
+		B6EA093B1968DC0600BC8F93 /* app3.png in Resources */ = {isa = PBXBuildFile; fileRef = B6EA09381968DC0600BC8F93 /* app3.png */; };
+		B6EA093E1968DE1100BC8F93 /* app1.png in Resources */ = {isa = PBXBuildFile; fileRef = B6EA093C1968DE1100BC8F93 /* app1.png */; };
+		B6EA093F1968DE1100BC8F93 /* app2.png in Resources */ = {isa = PBXBuildFile; fileRef = B6EA093D1968DE1100BC8F93 /* app2.png */; };
+		B6EA09411968DE7500BC8F93 /* monkeyBig.png in Resources */ = {isa = PBXBuildFile; fileRef = B6EA09401968DE7500BC8F93 /* monkeyBig.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -77,28 +77,28 @@
 		35F3DF1917D8011E009EFFF2 /* MonkeyFrenzyTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "MonkeyFrenzyTests-Info.plist"; sourceTree = "<group>"; };
 		35F3DF1B17D8011E009EFFF2 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		35F3DF1D17D8011E009EFFF2 /* MonkeyFrenzyGameTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MonkeyFrenzyGameTests.m; sourceTree = "<group>"; };
-		35F3DF2817D80158009EFFF2 /* background-music-aac.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "background-music-aac.caf"; sourceTree = "<group>"; };
-		35F3DF2917D80158009EFFF2 /* pew-pew-lei.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "pew-pew-lei.caf"; sourceTree = "<group>"; };
 		35F3DF2E17D803D6009EFFF2 /* GameOverScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameOverScene.h; sourceTree = "<group>"; };
 		35F3DF2F17D803D6009EFFF2 /* GameOverScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameOverScene.m; sourceTree = "<group>"; };
 		B62E7501194E8F7C0025ECB3 /* TitlePic.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TitlePic.png; sourceTree = "<group>"; };
 		B637C464194BE488003EE8FD /* Bananas.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Bananas.png; sourceTree = "<group>"; };
-		B637C466194BE67F003EE8FD /* Zookeeper.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Zookeeper.png; sourceTree = "<group>"; };
 		B637C46C194CC293003EE8FD /* Snappy.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Snappy.mp3; sourceTree = "<group>"; };
 		B637C470194CC40F003EE8FD /* throwing.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = throwing.m4a; sourceTree = "<group>"; };
 		B637C474194CC495003EE8FD /* monkeySound.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = monkeySound.m4a; sourceTree = "<group>"; };
 		B637C478194CC778003EE8FD /* Background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Background.png; sourceTree = "<group>"; };
-		B64E34C6194FDCA100A49862 /* fatMonkey.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = fatMonkey.png; sourceTree = "<group>"; };
-		B64E34C8194FDCFE00A49862 /* frenzyMonkey.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = frenzyMonkey.png; sourceTree = "<group>"; };
-		B64E34CA194FDD6A00A49862 /* monkey.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = monkey.png; sourceTree = "<group>"; };
-		B668F505195BC70A0012AF81 /* app3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = app3.png; sourceTree = "<group>"; };
-		B668F507195BC7690012AF81 /* app2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = app2.png; sourceTree = "<group>"; };
-		B668F509195BC7A70012AF81 /* app1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = app1.png; sourceTree = "<group>"; };
+		B64E34C8194FDCFE00A49862 /* oldFrenzyMonkey.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = oldFrenzyMonkey.png; sourceTree = "<group>"; };
+		B64E34CA194FDD6A00A49862 /* oldMonkey.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = oldMonkey.png; sourceTree = "<group>"; };
 		B668F50B195CC5230012AF81 /* Zookeeper_Female.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Zookeeper_Female.png; sourceTree = "<group>"; };
 		B6B592A9194D314B006D85D5 /* MainMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainMenu.h; sourceTree = "<group>"; };
 		B6B592AA194D314B006D85D5 /* MainMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainMenu.m; sourceTree = "<group>"; };
 		B6B592AC194D33E8006D85D5 /* CreditsMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreditsMenu.h; sourceTree = "<group>"; };
 		B6B592AD194D33E8006D85D5 /* CreditsMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreditsMenu.m; sourceTree = "<group>"; };
+		B6EA093019688F0700BC8F93 /* BanjoHop.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = BanjoHop.mp3; sourceTree = "<group>"; };
+		B6EA09321968A09500BC8F93 /* monkey.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = monkey.png; sourceTree = "<group>"; };
+		B6EA09341968A4CD00BC8F93 /* frenzyMonkey.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = frenzyMonkey.png; sourceTree = "<group>"; };
+		B6EA09381968DC0600BC8F93 /* app3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = app3.png; sourceTree = "<group>"; };
+		B6EA093C1968DE1100BC8F93 /* app1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = app1.png; sourceTree = "<group>"; };
+		B6EA093D1968DE1100BC8F93 /* app2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = app2.png; sourceTree = "<group>"; };
+		B6EA09401968DE7500BC8F93 /* monkeyBig.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = monkeyBig.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -216,11 +216,10 @@
 		35F3DF2717D80158009EFFF2 /* Sounds */ = {
 			isa = PBXGroup;
 			children = (
+				B6EA093019688F0700BC8F93 /* BanjoHop.mp3 */,
 				B637C474194CC495003EE8FD /* monkeySound.m4a */,
 				B637C470194CC40F003EE8FD /* throwing.m4a */,
 				B637C46C194CC293003EE8FD /* Snappy.mp3 */,
-				35F3DF2817D80158009EFFF2 /* background-music-aac.caf */,
-				35F3DF2917D80158009EFFF2 /* pew-pew-lei.caf */,
 			);
 			path = Sounds;
 			sourceTree = "<group>";
@@ -228,16 +227,17 @@
 		B637C47A194CC932003EE8FD /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				B6EA09401968DE7500BC8F93 /* monkeyBig.png */,
+				B6EA093C1968DE1100BC8F93 /* app1.png */,
+				B6EA093D1968DE1100BC8F93 /* app2.png */,
+				B6EA09381968DC0600BC8F93 /* app3.png */,
+				B6EA09341968A4CD00BC8F93 /* frenzyMonkey.png */,
+				B6EA09321968A09500BC8F93 /* monkey.png */,
 				B668F50B195CC5230012AF81 /* Zookeeper_Female.png */,
-				B668F509195BC7A70012AF81 /* app1.png */,
-				B668F507195BC7690012AF81 /* app2.png */,
-				B668F505195BC70A0012AF81 /* app3.png */,
-				B64E34CA194FDD6A00A49862 /* monkey.png */,
-				B64E34C8194FDCFE00A49862 /* frenzyMonkey.png */,
-				B64E34C6194FDCA100A49862 /* fatMonkey.png */,
+				B64E34CA194FDD6A00A49862 /* oldMonkey.png */,
+				B64E34C8194FDCFE00A49862 /* oldFrenzyMonkey.png */,
 				B62E7501194E8F7C0025ECB3 /* TitlePic.png */,
 				B637C478194CC778003EE8FD /* Background.png */,
-				B637C466194BE67F003EE8FD /* Zookeeper.png */,
 				B637C464194BE488003EE8FD /* Bananas.png */,
 			);
 			name = Images;
@@ -319,24 +319,24 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B637C467194BE680003EE8FD /* Zookeeper.png in Resources */,
+				B6EA09331968A09600BC8F93 /* monkey.png in Resources */,
 				B637C479194CC778003EE8FD /* Background.png in Resources */,
-				B64E34C9194FDCFE00A49862 /* frenzyMonkey.png in Resources */,
+				B64E34C9194FDCFE00A49862 /* oldFrenzyMonkey.png in Resources */,
 				B668F50C195CC5230012AF81 /* Zookeeper_Female.png in Resources */,
+				B6EA09351968A4CD00BC8F93 /* frenzyMonkey.png in Resources */,
+				B6EA093F1968DE1100BC8F93 /* app2.png in Resources */,
 				B637C46D194CC293003EE8FD /* Snappy.mp3 in Resources */,
-				B668F508195BC7690012AF81 /* app2.png in Resources */,
-				B64E34CB194FDD6A00A49862 /* monkey.png in Resources */,
-				35F3DF2B17D80158009EFFF2 /* background-music-aac.caf in Resources */,
+				B64E34CB194FDD6A00A49862 /* oldMonkey.png in Resources */,
 				35F3DEF817D8011E009EFFF2 /* InfoPlist.strings in Resources */,
-				B64E34C7194FDCA100A49862 /* fatMonkey.png in Resources */,
+				B6EA093119688F0700BC8F93 /* BanjoHop.mp3 in Resources */,
+				B6EA093B1968DC0600BC8F93 /* app3.png in Resources */,
+				B6EA093E1968DE1100BC8F93 /* app1.png in Resources */,
 				35F3DF0B17D8011E009EFFF2 /* Images.xcassets in Resources */,
 				B637C465194BE488003EE8FD /* Bananas.png in Resources */,
-				B668F506195BC70A0012AF81 /* app3.png in Resources */,
 				B637C471194CC40F003EE8FD /* throwing.m4a in Resources */,
 				35F3DF0117D8011E009EFFF2 /* Main.storyboard in Resources */,
-				B668F50A195BC7A70012AF81 /* app1.png in Resources */,
 				B62E7505194E8F7C0025ECB3 /* TitlePic.png in Resources */,
-				35F3DF2C17D80158009EFFF2 /* pew-pew-lei.caf in Resources */,
+				B6EA09411968DE7500BC8F93 /* monkeyBig.png in Resources */,
 				B637C475194CC495003EE8FD /* monkeySound.m4a in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
