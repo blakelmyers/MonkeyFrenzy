@@ -81,14 +81,13 @@
         menuLabel.fontSize = 20;
         menuLabel.name = @"menu";
         menuLabel.fontColor = [SKColor blackColor];
-        menuLabel.position = CGPointMake(self.size.width/12, self.size.height/1.1);
+        menuLabel.position = CGPointMake(self.size.width/1.07, self.size.height/20);
         
         SKSpriteNode *menuBack = [SKSpriteNode spriteNodeWithColor:[UIColor greenColor] size:CGSizeMake(menuLabel.frame.size.width, menuLabel.frame.size.height)];
-        menuBack.position = CGPointMake(self.size.width/12, self.size.height/1.07);
+        menuBack.position = CGPointMake(self.size.width/1.07, self.size.height/13);
         
         [self addChild:menuBack];
         [self addChild:menuLabel];
-        
         
     }
     return self;

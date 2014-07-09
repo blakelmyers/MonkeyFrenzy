@@ -8,7 +8,14 @@
 
 #import <UIKit/UIKit.h>
 #import <SpriteKit/SpriteKit.h>
+#import <iAd/ADBannerView.h>
 
-@interface ViewController : UIViewController
+@interface ViewController : UIViewController <ADBannerViewDelegate>
+
+@property ADBannerView *bannerView;
+
+- (void)hideAd:(NSNotification*)notification;
+
+- (void)showAd:(NSNotification*)notification;
 
 @end

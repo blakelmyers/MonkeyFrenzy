@@ -16,9 +16,44 @@
 @property (nonatomic) AVAudioPlayer * backgroundMusicPlayer;
 @end
 
-@implementation ViewController
+@implementation ViewController 
 
 - (BOOL)prefersStatusBarHidden {return YES;}
+
+-(void)viewDidLoad
+{
+    NSString *notificationNameOff = @"TurnAdsOff";
+    
+    [[NSNotificationCenter defaultCenter]
+     addObserver:self
+     selector:@selector(hideAd:)
+     name:notificationNameOff
+     object:nil];
+    
+    NSString *notificationNameOn = @"TurnAdsOn";
+    
+    [[NSNotificationCenter defaultCenter]
+     addObserver:self
+     selector:@selector(showAd:)
+     name:notificationNameOn
+     object:nil];
+}
+
+-(void)hideAd:(NSNotification*)notification
+{
+    if(!_bannerView.hidden)
+    {
+        //_bannerView.hidden = YES;
+    }
+}
+
+-(void)showAd:(NSNotification*)notification
+{
+    if(_bannerView.hidden)
+    {
+        //_bannerView.hidden = NO;
+    }
+}
 
 - (void)viewWillLayoutSubviews
 {
@@ -30,7 +65,13 @@
     [self.backgroundMusicPlayer prepareToPlay];
     [self.backgroundMusicPlayer setVolume:0.4];
     [self.backgroundMusicPlayer play];
-
+ 
+     _bannerView= [[ADBannerView alloc]initWithFrame:
+                  CGRectMake(0, 0, 480, 32)];
+    
+    [_bannerView setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
+    [self.view addSubview:_bannerView];
+    
     // Configure the view.
     SKView * skView = (SKView *)self.view;
     if (!skView.scene) {
@@ -38,9 +79,10 @@
       //skView.showsNodeCount = YES;
       
       // Create and configure the scene.
-      SKScene * scene = [MainMenu sceneWithSize:skView.bounds.size];
-      scene.scaleMode = SKSceneScaleModeAspectFill;
+      MainMenu * scene = [MainMenu sceneWithSize:skView.bounds.size];
       
+      scene.scaleMode = SKSceneScaleModeAspectFill;
+        
       // Present the scene.
       [skView presentScene:scene];
     }
@@ -64,6 +106,24 @@
 {
     [super didReceiveMemoryWarning];
     // Release any cached data, images, etc that aren't in use.
+}
+
+#pragma mark - bannerViewDelegates
+
+-(void)bannerView:(ADBannerView *)banner
+didFailToReceiveAdWithError:(NSError *)error{
+    NSLog(@"error");
+}
+
+-(void)bannerViewDidLoadAd:(ADBannerView *)banner{
+    NSLog(@"Ad loaded");
+}
+-(void)bannerViewWillLoadAd:(ADBannerView *)banner{
+    NSLog(@"Ad will load");
+}
+-(void)bannerViewActionDidFinish:(ADBannerView *)banner{
+    NSLog(@"Ad did finish");
+    
 }
 
 @end

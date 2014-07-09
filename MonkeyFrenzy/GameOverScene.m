@@ -9,6 +9,7 @@
 
 #import "GameScene.h"
 #import "GameOverScene.h"
+#import "MainMenu.h"
  
 @implementation GameOverScene
 
@@ -17,6 +18,9 @@ ModeType theModeSelected;
 -(id)initWithSize:(CGSize)size won:(BOOL)won mode:(ModeType)modePicked score:(int)gameScore{
     if (self = [super initWithSize:size]) {
  
+        NSString *notificationName = @"TurnAdsOn";
+        [[NSNotificationCenter defaultCenter] postNotificationName:notificationName object:nil userInfo:nil];
+        
         theModeSelected = modePicked;
         // 1
         self.backgroundColor = [SKColor colorWithRed:1.0 green:1.0 blue:0.0 alpha:1.0];
@@ -40,7 +44,7 @@ ModeType theModeSelected;
             label2.text = highScore;
             label2.fontSize = 25;
             label2.fontColor = [SKColor blackColor];
-            label2.position = CGPointMake(self.size.width/2, self.size.height/1.1);
+            label2.position = CGPointMake(self.size.width/2, self.size.height/1.3);
             [self addChild:label2];
         
         }
@@ -62,16 +66,28 @@ ModeType theModeSelected;
         
         
         NSString *tryMessage;
-        tryMessage = @"TRY AGAIN ?";
+        tryMessage = @"REPLAY";
         
         SKLabelNode *tryLabel = [SKLabelNode labelNodeWithFontNamed:@"Menlo-Regular"];
         tryLabel.text = tryMessage;
         tryLabel.fontSize = 30;
         tryLabel.name = @"try";
         tryLabel.fontColor = [SKColor blackColor];
-        tryLabel.position = CGPointMake(self.size.width/2, self.size.height/5);
+        tryLabel.position = CGPointMake(self.size.width/3, self.size.height/5);
  
         [self addChild:tryLabel];
+        
+        NSString *menuMessage;
+        menuMessage = @"MENU";
+        
+        SKLabelNode *menuLabel = [SKLabelNode labelNodeWithFontNamed:@"Menlo-Regular"];
+        menuLabel.text = menuMessage;
+        menuLabel.fontSize = 30;
+        menuLabel.name = @"menu";
+        menuLabel.fontColor = [SKColor blackColor];
+        menuLabel.position = CGPointMake(self.size.width/1.5, self.size.height/5);
+        
+        [self addChild:menuLabel];
         
        /*
         [self runAction:
@@ -107,6 +123,19 @@ ModeType theModeSelected;
              // 5
              SKTransition *reveal = [SKTransition flipHorizontalWithDuration:0.5];
              SKScene * myScene = [[GameScene alloc] initWithSize:self.size mode:theModeSelected];
+             [self.view presentScene:myScene transition: reveal];
+         }]
+                              ]]
+         ];
+        return;
+    }
+    else if ([node.name isEqualToString:@"menu"]) {
+        [self runAction:
+         [SKAction sequence:@[
+                              [SKAction runBlock:^{
+             // 5
+             SKTransition *reveal = [SKTransition flipVerticalWithDuration:0.5];
+             SKScene * myScene = [[MainMenu alloc] initWithSize:self.size];
              [self.view presentScene:myScene transition: reveal];
          }]
                               ]]

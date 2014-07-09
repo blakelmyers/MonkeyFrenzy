@@ -20,6 +20,9 @@
 -(id)initWithSize:(CGSize)size {
     if (self = [super initWithSize:size]) {
         
+        NSString *notificationName = @"TurnAdsOn";
+        [[NSNotificationCenter defaultCenter] postNotificationName:notificationName object:nil userInfo:nil];
+        
         self.backgroundColor = [SKColor colorWithRed:0.0 green:0.0 blue:1.0 alpha:1.0];
         
         SKSpriteNode *bgImage = [SKSpriteNode spriteNodeWithImageNamed:@"Background"];
@@ -27,18 +30,18 @@
         [self addChild:bgImage];
         
         NSString *message;
-        message = @"SELECTE A MODE";
+        message = @"SELECT A MODE";
         
         SKLabelNode *label = [SKLabelNode labelNodeWithFontNamed:@"Menlo-Regular"];
         label.text = message;
         label.name = @"test";
         label.fontSize = 22;
         label.fontColor = [SKColor blackColor];
-        label.position = CGPointMake(self.size.width/2, self.size.height/2.5);
+        label.position = CGPointMake(self.size.width/2, self.size.height/2.8);
         [self addChild:label];
         
         SKSpriteNode * title = [SKSpriteNode spriteNodeWithImageNamed:@"TitlePic"];
-        title.position = CGPointMake(self.size.width/2, self.size.height/1.5);
+        title.position = CGPointMake(self.size.width/2, self.size.height/1.6);
         [self addChild:title];
         
         SKSpriteNode * easyBtn = [SKSpriteNode spriteNodeWithImageNamed:@"monkey"];
@@ -98,10 +101,10 @@
         menuLabel.fontSize = 20;
         menuLabel.name = @"credits";
         menuLabel.fontColor = [SKColor blackColor];
-        menuLabel.position = CGPointMake(self.size.width/1.1, self.size.height/1.1);
+        menuLabel.position = CGPointMake(self.size.width/1.1, self.size.height/20);
         
         SKSpriteNode *creditBack = [SKSpriteNode spriteNodeWithColor:[UIColor greenColor] size:CGSizeMake(menuLabel.frame.size.width, menuLabel.frame.size.height)];
-        creditBack.position = CGPointMake(self.size.width/1.1, self.size.height/1.07);
+        creditBack.position = CGPointMake(self.size.width/1.1, self.size.height/13);
         
         [self addChild:creditBack];
         [self addChild:menuLabel];

@@ -55,6 +55,9 @@ static inline CGPoint rwNormalize(CGPoint a) {
 -(id)initWithSize:(CGSize)size mode:(ModeType)modePicked{
     if (self = [super initWithSize:size]) {
 
+        NSString *notificationName = @"TurnAdsOff";
+        [[NSNotificationCenter defaultCenter] postNotificationName:notificationName object:nil userInfo:nil];
+        
         self.theModeSelected = modePicked;
         self.displayLabel = true;
         self.frenzyCount = 0;
@@ -75,14 +78,7 @@ static inline CGPoint rwNormalize(CGPoint a) {
         self.theMonkeyType = FRENZY;
         
         NSString *message;
-        if(self.theModeSelected == FRENZY_MODE)
-        {
-            message = @"0";
-        }
-        else
-        {
-            message = @"TAP TO THROW BANANAS AND FEED THE MONKEYS";
-        }
+        message = @"TAP TO THROW BANANAS AND FEED THE MONKEYS";
         
         self.label = [SKLabelNode labelNodeWithFontNamed:@"Menlo-Regular"];
         self.label.text = message;
@@ -91,21 +87,24 @@ static inline CGPoint rwNormalize(CGPoint a) {
         self.label.position = CGPointMake(self.size.width/2, self.size.height/2);
         [self addChild:self.label];
         
-        NSString *menuMessage;
-        menuMessage = @"MENU";
+        if(self.theModeSelected != FRENZY_MODE)
+        {
+            NSString *menuMessage;
+            menuMessage = @"MENU";
         
-        SKLabelNode *menuLabel = [SKLabelNode labelNodeWithFontNamed:@"Menlo-Regular"];
-        menuLabel.text = menuMessage;
-        menuLabel.fontSize = 20;
-        menuLabel.name = @"menu";
-        menuLabel.fontColor = [SKColor blackColor];
-        menuLabel.position = CGPointMake(self.size.width/12, self.size.height/1.1);
+            SKLabelNode *menuLabel = [SKLabelNode labelNodeWithFontNamed:@"Menlo-Regular"];
+            menuLabel.text = menuMessage;
+            menuLabel.fontSize = 20;
+            menuLabel.name = @"menu";
+            menuLabel.fontColor = [SKColor blackColor];
+            menuLabel.position = CGPointMake(self.size.width/1.07, self.size.height/20);
         
-        SKSpriteNode *menuBack = [SKSpriteNode spriteNodeWithColor:[UIColor greenColor] size:CGSizeMake(menuLabel.frame.size.width, menuLabel.frame.size.height)];
-        menuBack.position = CGPointMake(self.size.width/12, self.size.height/1.07);
-        
-        [self addChild:menuBack]; 
-        [self addChild:menuLabel];
+            SKSpriteNode *menuBack = [SKSpriteNode spriteNodeWithColor:[UIColor greenColor] size:CGSizeMake(menuLabel.frame.size.width, menuLabel.frame.size.height)];
+            menuBack.position = CGPointMake(self.size.width/1.07, self.size.height/13);
+            
+            [self addChild:menuBack];
+            [self addChild:menuLabel];
+        }
         
         if(self.theModeSelected == FRENZY_MODE)
         {
@@ -114,9 +113,9 @@ static inline CGPoint rwNormalize(CGPoint a) {
             NSString * highScore = [NSString stringWithFormat:@"HIGH SCORE: %d", [[defaults objectForKey:@"frenzyScore"] intValue]];
             SKLabelNode *label2 = [SKLabelNode labelNodeWithFontNamed:@"Menlo-Regular"];
             label2.text = highScore;
-            label2.fontSize = 20;
+            label2.fontSize = 15;
             label2.fontColor = [SKColor blackColor];
-            label2.position = CGPointMake(self.size.width/2, self.size.height/1.1);
+            label2.position = CGPointMake(self.size.width/2, self.size.height/1.2);
             [self addChild:label2];
         }
  
@@ -177,12 +176,12 @@ static inline CGPoint rwNormalize(CGPoint a) {
     if(self.theModeSelected == EASY_MODE)
     {
         // Determine where to spawn the monkey along the Y axis
-        int minY = monkey.size.height / 2;
-        int maxY = self.frame.size.height - monkey.size.height / 2;
+        int minY = monkey.size.height;
+        int maxY = self.frame.size.height - monkey.size.height*1.2;
         int rangeY = maxY - minY;
         int actualY = (arc4random() % rangeY) + minY;
         
-        int minX = monkey.size.width / 2;
+        int minX = monkey.size.width * 1.1;
         int maxX = self.frame.size.width - monkey.size.width / 2;
         int rangeX = maxX - minX;
         int actualX = (arc4random() % rangeX) + minX;
@@ -195,7 +194,7 @@ static inline CGPoint rwNormalize(CGPoint a) {
     else
     {
         // Determine where to spawn the monkey along the Y axis
-        int minY = monkey.size.height / 2;
+        int minY = monkey.size.height;
         int maxY = self.frame.size.height - monkey.size.height / 2;
         int rangeY = maxY - minY;
         int actualY = (arc4random() % rangeY) + minY;
