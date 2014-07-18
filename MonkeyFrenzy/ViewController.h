@@ -14,8 +14,15 @@
 
 @property ADBannerView *bannerView;
 
+@property BOOL adLoaded;
+
 - (void)hideAd:(NSNotification*)notification;
 
 - (void)showAd:(NSNotification*)notification;
+
+-(void)bannerView:(ADBannerView *)banner didFailToReceiveAdWithError:(NSError *)error;
+-(void)bannerViewDidLoadAd:(ADBannerView *)banner;
+-(void)bannerViewWillLoadAd:(ADBannerView *)banner;
+-(void)bannerViewActionDidFinish:(ADBannerView *)banner;
 
 @end

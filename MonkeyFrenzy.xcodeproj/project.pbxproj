@@ -34,6 +34,7 @@
 		B64E34C9194FDCFE00A49862 /* oldFrenzyMonkey.png in Resources */ = {isa = PBXBuildFile; fileRef = B64E34C8194FDCFE00A49862 /* oldFrenzyMonkey.png */; };
 		B64E34CB194FDD6A00A49862 /* oldMonkey.png in Resources */ = {isa = PBXBuildFile; fileRef = B64E34CA194FDD6A00A49862 /* oldMonkey.png */; };
 		B668F50C195CC5230012AF81 /* Zookeeper_Female.png in Resources */ = {isa = PBXBuildFile; fileRef = B668F50B195CC5230012AF81 /* Zookeeper_Female.png */; };
+		B676A22A1978BF3F009278F0 /* GCHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = B676A2291978BF3F009278F0 /* GCHelper.m */; };
 		B6B592AB194D314B006D85D5 /* MainMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = B6B592AA194D314B006D85D5 /* MainMenu.m */; };
 		B6B592AE194D33E8006D85D5 /* CreditsMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = B6B592AD194D33E8006D85D5 /* CreditsMenu.m */; };
 		B6EA093119688F0700BC8F93 /* BanjoHop.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B6EA093019688F0700BC8F93 /* BanjoHop.mp3 */; };
@@ -90,6 +91,8 @@
 		B64E34C8194FDCFE00A49862 /* oldFrenzyMonkey.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = oldFrenzyMonkey.png; sourceTree = "<group>"; };
 		B64E34CA194FDD6A00A49862 /* oldMonkey.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = oldMonkey.png; sourceTree = "<group>"; };
 		B668F50B195CC5230012AF81 /* Zookeeper_Female.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Zookeeper_Female.png; sourceTree = "<group>"; };
+		B676A2281978BF3F009278F0 /* GCHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCHelper.h; sourceTree = "<group>"; };
+		B676A2291978BF3F009278F0 /* GCHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCHelper.m; sourceTree = "<group>"; };
 		B6B592A9194D314B006D85D5 /* MainMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainMenu.h; sourceTree = "<group>"; };
 		B6B592AA194D314B006D85D5 /* MainMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainMenu.m; sourceTree = "<group>"; };
 		B6B592AC194D33E8006D85D5 /* CreditsMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreditsMenu.h; sourceTree = "<group>"; };
@@ -165,6 +168,8 @@
 		35F3DEF317D8011E009EFFF2 /* MonkeyFrenzyGame */ = {
 			isa = PBXGroup;
 			children = (
+				B676A2281978BF3F009278F0 /* GCHelper.h */,
+				B676A2291978BF3F009278F0 /* GCHelper.m */,
 				B637C47A194CC932003EE8FD /* Images */,
 				35F3DF2717D80158009EFFF2 /* Sounds */,
 				35F3DEFC17D8011E009EFFF2 /* AppDelegate.h */,
@@ -375,6 +380,7 @@
 				35F3DEFE17D8011E009EFFF2 /* AppDelegate.m in Sources */,
 				35F3DEFA17D8011E009EFFF2 /* main.m in Sources */,
 				B6B592AB194D314B006D85D5 /* MainMenu.m in Sources */,
+				B676A22A1978BF3F009278F0 /* GCHelper.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

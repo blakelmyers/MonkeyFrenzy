@@ -195,7 +195,7 @@ static inline CGPoint rwNormalize(CGPoint a) {
     {
         // Determine where to spawn the monkey along the Y axis
         int minY = monkey.size.height;
-        int maxY = self.frame.size.height - monkey.size.height / 2;
+        int maxY = self.frame.size.height - monkey.size.height * 1.1;
         int rangeY = maxY - minY;
         int actualY = (arc4random() % rangeY) + minY;
         

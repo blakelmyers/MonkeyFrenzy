@@ -10,6 +10,7 @@
 #import "GameScene.h"
 #import "GameOverScene.h"
 #import "MainMenu.h"
+#import "GCHelper.h"
  
 @implementation GameOverScene
 
@@ -35,6 +36,9 @@ ModeType theModeSelected;
             
             if(gameScore > [[defaults objectForKey:@"frenzyScore"] intValue])
             {
+                NSString *leaderboardName = @"MonkeyFrenzyScores";
+                [[GCHelper sharedInstance] reportScore:gameScore forLeaderboardID:leaderboardName];
+                
                 [defaults setObject:[NSNumber numberWithInteger:gameScore] forKey:@"frenzyScore"];
                 [defaults synchronize];
             }
