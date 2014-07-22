@@ -23,7 +23,7 @@
 -(void)viewDidLoad
 {
     self.adLoaded = NO;
-    sleep(3);  // allow game center
+    //sleep(3);  // allow game center
     _bannerView= [[ADBannerView alloc]initWithFrame:
                   CGRectMake(0, 0, 480, 32)];
     _bannerView.delegate = self;

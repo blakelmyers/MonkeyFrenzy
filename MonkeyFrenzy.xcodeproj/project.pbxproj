@@ -24,6 +24,8 @@
 		35F3DF1C17D8011E009EFFF2 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 35F3DF1A17D8011E009EFFF2 /* InfoPlist.strings */; };
 		35F3DF1E17D8011E009EFFF2 /* MonkeyFrenzyGameTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 35F3DF1D17D8011E009EFFF2 /* MonkeyFrenzyGameTests.m */; };
 		35F3DF3017D803D6009EFFF2 /* GameOverScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 35F3DF2F17D803D6009EFFF2 /* GameOverScene.m */; };
+		B627B2711979B4D3005A2E2B /* Launch1.png in Resources */ = {isa = PBXBuildFile; fileRef = B627B26F1979B4D3005A2E2B /* Launch1.png */; };
+		B627B2721979B4D3005A2E2B /* Launch2.png in Resources */ = {isa = PBXBuildFile; fileRef = B627B2701979B4D3005A2E2B /* Launch2.png */; };
 		B62E7505194E8F7C0025ECB3 /* TitlePic.png in Resources */ = {isa = PBXBuildFile; fileRef = B62E7501194E8F7C0025ECB3 /* TitlePic.png */; };
 		B637C465194BE488003EE8FD /* Bananas.png in Resources */ = {isa = PBXBuildFile; fileRef = B637C464194BE488003EE8FD /* Bananas.png */; };
 		B637C46D194CC293003EE8FD /* Snappy.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B637C46C194CC293003EE8FD /* Snappy.mp3 */; };
@@ -81,6 +83,8 @@
 		35F3DF1D17D8011E009EFFF2 /* MonkeyFrenzyGameTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MonkeyFrenzyGameTests.m; sourceTree = "<group>"; };
 		35F3DF2E17D803D6009EFFF2 /* GameOverScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameOverScene.h; sourceTree = "<group>"; };
 		35F3DF2F17D803D6009EFFF2 /* GameOverScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameOverScene.m; sourceTree = "<group>"; };
+		B627B26F1979B4D3005A2E2B /* Launch1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Launch1.png; sourceTree = "<group>"; };
+		B627B2701979B4D3005A2E2B /* Launch2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Launch2.png; sourceTree = "<group>"; };
 		B62E7501194E8F7C0025ECB3 /* TitlePic.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TitlePic.png; sourceTree = "<group>"; };
 		B637C464194BE488003EE8FD /* Bananas.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Bananas.png; sourceTree = "<group>"; };
 		B637C46C194CC293003EE8FD /* Snappy.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Snappy.mp3; sourceTree = "<group>"; };
@@ -236,6 +240,8 @@
 		B637C47A194CC932003EE8FD /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				B627B26F1979B4D3005A2E2B /* Launch1.png */,
+				B627B2701979B4D3005A2E2B /* Launch2.png */,
 				B6EA09401968DE7500BC8F93 /* monkeyBig.png */,
 				B6EA093C1968DE1100BC8F93 /* app1.png */,
 				B6EA093D1968DE1100BC8F93 /* app2.png */,
@@ -305,6 +311,9 @@
 							com.apple.GameCenter = {
 								enabled = 1;
 							};
+							com.apple.InAppPurchase = {
+								enabled = 0;
+							};
 						};
 					};
 					35F3DF0F17D8011E009EFFF2 = {
@@ -343,9 +352,11 @@
 				B6EA09351968A4CD00BC8F93 /* frenzyMonkey.png in Resources */,
 				B6EA093F1968DE1100BC8F93 /* app2.png in Resources */,
 				B637C46D194CC293003EE8FD /* Snappy.mp3 in Resources */,
+				B627B2721979B4D3005A2E2B /* Launch2.png in Resources */,
 				B64E34CB194FDD6A00A49862 /* oldMonkey.png in Resources */,
 				35F3DEF817D8011E009EFFF2 /* InfoPlist.strings in Resources */,
 				B6EA093119688F0700BC8F93 /* BanjoHop.mp3 in Resources */,
+				B627B2711979B4D3005A2E2B /* Launch1.png in Resources */,
 				B6EA093B1968DC0600BC8F93 /* app3.png in Resources */,
 				B6EA093E1968DE1100BC8F93 /* app1.png in Resources */,
 				35F3DF0B17D8011E009EFFF2 /* Images.xcassets in Resources */,
@@ -446,7 +457,8 @@
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Blake Myers (SPFH66PMCV)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Blake Myers (SPFH66PMCV)";
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -463,6 +475,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				ONLY_ACTIVE_ARCH = YES;
+				PROVISIONING_PROFILE = "b199a5fb-d9b3-46a9-8f2c-e86d1b766595";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -483,7 +496,8 @@
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Blake Myers (SPFH66PMCV)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Blake Myers (SPFH66PMCV)";
 				COPY_PHASE_STRIP = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -493,6 +507,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				PROVISIONING_PROFILE = "b199a5fb-d9b3-46a9-8f2c-e86d1b766595";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
