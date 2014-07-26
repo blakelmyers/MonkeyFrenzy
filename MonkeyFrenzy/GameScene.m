@@ -22,8 +22,11 @@ static const uint32_t monkeyCategory        =  0x1 << 1;
 @property (nonatomic) ModeType theModeSelected;
 @property (nonatomic) BOOL displayLabel;;
 @property (nonatomic) SKLabelNode *label;
+@property (nonatomic) SKLabelNode *labelSpeed;
 @property (nonatomic) int bananaCount;
-@property (nonatomic) int frenzyCount;
+@property (nonatomic) __block int frenzyCount;
+@property (nonatomic) __block NSTimeInterval timeInterval;
+@property (nonatomic) __block NSTimeInterval monkeySpeed;
 @end
 
 static inline CGPoint rwAdd(CGPoint a, CGPoint b) {
@@ -62,6 +65,9 @@ static inline CGPoint rwNormalize(CGPoint a) {
         self.displayLabel = true;
         self.frenzyCount = 0;
         self.bananaCount = 0;
+        
+        self.monkeySpeed = 2.7;
+        self.timeInterval = 2.0;
 
         self.backgroundColor = [SKColor colorWithRed:0.0 green:1.0 blue:0.0 alpha:1.0];
         SKSpriteNode *bgImage = [SKSpriteNode spriteNodeWithImageNamed:@"Background"];
@@ -117,6 +123,16 @@ static inline CGPoint rwNormalize(CGPoint a) {
             label2.fontColor = [SKColor blackColor];
             label2.position = CGPointMake(self.size.width/2, self.size.height/1.2);
             [self addChild:label2];
+            
+            NSString *message3;
+            message3 = @"";
+            
+            self.labelSpeed = [SKLabelNode labelNodeWithFontNamed:@"Menlo-Regular"];
+            self.labelSpeed.text = message3;
+            self.labelSpeed.fontSize = 15;
+            self.labelSpeed.fontColor = [SKColor blackColor];
+            self.labelSpeed.position = CGPointMake(self.size.width/2, self.size.height/3);
+            [self addChild:self.labelSpeed];
         }
  
     }
@@ -151,7 +167,8 @@ static inline CGPoint rwNormalize(CGPoint a) {
             [dict setObject:[NSNumber numberWithInt:1] forKey:@"Health"];
             if(self.theModeSelected == FRENZY_MODE)
             {
-                actualDuration = 1.7;
+                
+                actualDuration = self.monkeySpeed;   //1.7
             }
             else
             {
@@ -208,20 +225,13 @@ static inline CGPoint rwNormalize(CGPoint a) {
         SKAction * actionMove = [SKAction moveTo:CGPointMake(-monkey.size.width/2, actualY) duration:actualDuration];
         SKAction * actionMoveDone = [SKAction removeFromParent];
         
-        int scoreIfFrenzy = 0;
-        
-        if(self.theModeSelected == FRENZY_MODE)
-        {
-            scoreIfFrenzy = self.frenzyCount;
-            ++scoreIfFrenzy;
-        }
         SKAction * loseAction = [SKAction runBlock:^{
         if(self.theModeSelected == FRENZY_MODE)
         {
             [self runAction:[SKAction playSoundFileNamed:@"monkeySound.m4a" waitForCompletion:NO]];
         }
         SKTransition *reveal = [SKTransition flipHorizontalWithDuration:0.5];
-            SKScene * gameOverScene = [[GameOverScene alloc] initWithSize:self.size won:NO mode:self.theModeSelected score:scoreIfFrenzy];
+            SKScene * gameOverScene = [[GameOverScene alloc] initWithSize:self.size won:NO mode:self.theModeSelected score:self.frenzyCount];
         [self.view presentScene:gameOverScene transition: reveal];
         }];
         [monkey runAction:[SKAction sequence:@[actionMove, loseAction, actionMoveDone]]];
@@ -275,7 +285,7 @@ static inline CGPoint rwNormalize(CGPoint a) {
     }
     else   // FRENZY_MODE
     {
-        if (self.lastSpawnTimeInterval > 0.6) {
+        if (self.lastSpawnTimeInterval > self.timeInterval) {
             self.theMonkeyType = FRENZY;
             ++self.bananaCount;
             self.lastSpawnTimeInterval = 0;
@@ -402,6 +412,26 @@ static inline CGPoint rwNormalize(CGPoint a) {
         {
             ++self.frenzyCount;
             self.label.text = [NSString stringWithFormat:@"%d", self.frenzyCount];
+
+            if((self.frenzyCount != 0) && ((self.frenzyCount % 10) == 0)  && (self.frenzyCount < 31))  // increase speed
+            {
+                self.timeInterval -= 0.4;
+                self.labelSpeed.text = [NSString stringWithFormat:@"RATE INCREASE"];
+                NSLog(@"Time %0.2f", self.timeInterval);
+            }
+            else if((self.frenzyCount >= 50)  && (self.frenzyCount < 60))
+            {
+                self.labelSpeed.text = [NSString stringWithFormat:@"MONKEY SPEED WILL DOUBLE AT 60"];
+            }
+            else if(self.frenzyCount >= 60 && (self.frenzyCount < 70))
+            {
+                self.monkeySpeed = 1;
+                self.labelSpeed.text = [NSString stringWithFormat:@"MAX SPEED"];
+            }
+            else
+            {
+                self.labelSpeed.text = [NSString stringWithFormat:@""];
+            }
         }
         else
         {

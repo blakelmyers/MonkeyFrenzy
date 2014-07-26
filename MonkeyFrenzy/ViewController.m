@@ -118,16 +118,17 @@
 -(void)bannerView:(ADBannerView *)banner
 didFailToReceiveAdWithError:(NSError *)error{
     NSLog(@"error");
-    if (!self.adLoaded)
-    {
-        _bannerView.hidden = YES;
-    }
+    
+    self.adLoaded = NO;
+    _bannerView.hidden = YES;
 }
 
 -(void)bannerViewDidLoadAd:(ADBannerView *)banner{
     NSLog(@"Ad loaded");
     
     self.adLoaded = YES;
+    
+    _bannerView.hidden = NO;
 }
 -(void)bannerViewWillLoadAd:(ADBannerView *)banner{
     NSLog(@"Ad will load");

@@ -523,6 +523,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MonkeyFrenzy/MonkeyFrenzy-Prefix.pch";
 				INFOPLIST_FILE = "MonkeyFrenzy/MonkeyFrenzy-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = MonkeyFrenzy;
 				PROVISIONING_PROFILE = "";
 				SPRITEKIT_TEXTURE_ATLAS_OUTPUT = YES;
@@ -540,6 +541,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MonkeyFrenzy/MonkeyFrenzy-Prefix.pch";
 				INFOPLIST_FILE = "MonkeyFrenzy/MonkeyFrenzy-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = MonkeyFrenzy;
 				PROVISIONING_PROFILE = "";
 				SPRITEKIT_TEXTURE_ATLAS_OUTPUT = YES;

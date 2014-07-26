@@ -73,6 +73,16 @@
         label5.position = CGPointMake(self.size.width/2, self.size.height/3.3);
         [self addChild:label5];
         
+        NSString *message6;
+        message6 = @"Brenda Robles";
+        
+        SKLabelNode *label6 = [SKLabelNode labelNodeWithFontNamed:@"Menlo-Regular"];
+        label6.text = message6;
+        label6.fontSize = 16;
+        label6.fontColor = [SKColor blackColor];
+        label6.position = CGPointMake(self.size.width/2, self.size.height/4.4);
+        [self addChild:label6];
+        
         NSString *menuMessage;
         menuMessage = @"MENU";
         
